@@ -9,7 +9,7 @@ public class Bet {
     private MoneyAmount moneyAmount;
 
     public Bet(BetID betID, MoneyAmount moneyAmount) {
-        this.betID = new BetID();
+        this.betID = betID;
         this.moneyAmount = moneyAmount;
     }
 

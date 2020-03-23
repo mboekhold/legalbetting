@@ -1,4 +1,4 @@
-package bettingauthoritiyAPI;
+package bettingauthorityAPI;
 
 public interface IBetTokenAuthority {
     BetToken getBetToken(BettingRoundID bettingRoundID);

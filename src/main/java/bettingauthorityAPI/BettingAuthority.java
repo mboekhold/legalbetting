@@ -1,4 +1,4 @@
-package bettingauthoritiyAPI;
+package bettingauthorityAPI;
 
 /**
  * Compound BettingAuthority Class, containing both a IBetLoggingAuthority and IBetTokenAuthority

@@ -1,4 +1,4 @@
-package bettingauthoritiyAPI;
+package bettingauthorityAPI;
 
 
 import java.time.Instant;

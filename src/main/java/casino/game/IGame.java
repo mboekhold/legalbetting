@@ -31,7 +31,7 @@ public interface IGame {
      * @return true when bet is accepted by the game, otherwise false.
      * @throws NoCurrentRoundException when no BettingRound is currently active.
      */
-    boolean acceptBet(Bet bet, IGamingMachine gamingMachine) throws NoCurrentRoundException;
+//    boolean acceptBet(Bet bet, IGamingMachine gamingMachine) throws NoCurrentRoundException;
 
 
     /**
