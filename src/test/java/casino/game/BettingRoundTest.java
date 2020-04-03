@@ -64,7 +64,15 @@ public class BettingRoundTest {
 
     @Test
     public void numberOfBetsMadeShouldReturnAmountOfBetsInBettingRound(){
+        //arrange
 
+        //act
+        bettingRound.placeBet(bet);
+        bettingRound.placeBet(bet2);
+        int expectedNumberOfBets = 2;
+
+        //assert
+        assertEquals(expectedNumberOfBets, bettingRound.numberOFBetsMade());
     }
 
 }
