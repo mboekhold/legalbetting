@@ -2,7 +2,6 @@ package casino.cashier;
 
 import casino.bet.Bet;
 import casino.bet.MoneyAmount;
-import casino.player.Player;
 import org.junit.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;

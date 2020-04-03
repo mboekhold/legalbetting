@@ -4,23 +4,19 @@ import bettingauthorityAPI.GamingMachineID;
 import casino.bet.Bet;
 import casino.bet.BetResult;
 import casino.cashier.IPlayerCard;
-import casino.game.Game;
-import casino.player.Player;
+import casino.game.IGame;
 
 public class GamingMachine implements IGamingMachine {
-    private Game game;
+    private IGame game;
 
-    public GamingMachine(Game game) {
+    public GamingMachine(IGame game) {
         this.game = game;
     }
 
-    public Game getGame() {
+    public IGame getGame() {
         return game;
     }
 
-    public void checkBet(Player player, Bet bet) {
-
-    }
 
     @Override
     public boolean placeBet(long amountInCents) throws NoPlayerCardException {

@@ -1,9 +1,6 @@
 package casino.gamingmachine;
 
-import casino.bet.Bet;
-import casino.cashier.BetNotExceptedException;
-import casino.game.Game;
-import casino.player.Player;
+import casino.game.IGame;
 import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.is;
@@ -15,7 +12,7 @@ public class GamingMachineTest {
     @Test
     public void gamingMachineConstructor_GameIsSet() {
         // Arrange
-        Game game = mock(Game.class);
+       IGame game = mock(IGame.class);
 
         // Act
         GamingMachine gamingMachine = new GamingMachine(game);
