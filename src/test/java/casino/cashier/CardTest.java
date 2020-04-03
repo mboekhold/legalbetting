@@ -2,6 +2,8 @@ package casino.cashier;
 
 import casino.bet.BetID;
 import org.junit.Test;
+
+import static org.hamcrest.CoreMatchers.is;
 import static org.mockito.Mockito.*;
 import static org.junit.Assert.*;
 
@@ -18,6 +20,6 @@ public class CardTest {
         card.addBetID(betID);
 
         // Assert
-        assertThat(AMOUNTOFBETS, card.getNumberOfBetIDs());
+        assertThat(AMOUNTOFBETS, is(card.getNumberOfBetIDs()));
     }
 }
