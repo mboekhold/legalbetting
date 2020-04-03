@@ -1,6 +1,8 @@
 package casino.gamingmachine;
 
+import casino.bet.Bet;
 import casino.game.Game;
+import casino.player.Player;
 
 public class GamingMachine {
     private Game game;
@@ -11,5 +13,9 @@ public class GamingMachine {
 
     public Game getGame() {
         return game;
+    }
+
+    public void checkBet(Player player, Bet bet) {
+
     }
 }
