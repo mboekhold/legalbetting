@@ -37,8 +37,8 @@ public class BettingRoundTest {
 
         //act
         bettingRound.placeBet(bet);
-        //assert
 
+        //assert
         assertTrue(bettingRound.getAllBetsMade().size() > 0);
 
     }
