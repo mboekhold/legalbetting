@@ -12,9 +12,9 @@ public class BettingRound implements IBettingRound {
     private BetToken betToken;
     private BettingRoundID bettingRoundID;
 
-    public BettingRound(BettingRoundID bettingRoundID) {
+    public BettingRound(BettingRoundID bettingRoundID, BetToken betToken) {
         this.bettingRoundID = bettingRoundID;
-        this.betToken = new BetTokenAuthority().getBetToken(bettingRoundID);
+        this.betToken = betToken;
     }
 
 
