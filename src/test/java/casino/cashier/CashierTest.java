@@ -37,4 +37,18 @@ public class CashierTest {
 
         assertThat(ValidBet, is(true));
     }
+
+    @Test(expected = BetNotExceptedException.class)
+    public void checkIfBetIsValid_ValidCardAndBettTooHigh_ThrowException() throws BetNotExceptedException{
+        Cashier cashier = new Cashier();
+        Card card = mock(Card.class);
+        Bet bet = mock(Bet.class);
+        cashier.addAmount(card, mock(MoneyAmount.class));
+        when(bet.getMoneyAmount()).thenReturn(mock(MoneyAmount.class));
+        when(bet.getMoneyAmount().getAmountInCents()).thenReturn((long) 10.0);
+
+        Boolean ValidBet = cashier.checkIfBetIsValid(card, bet);
+
+        assertThat(ValidBet, is(true));
+    }
 }
