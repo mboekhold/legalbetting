@@ -28,6 +28,6 @@ public class Casino implements ICasino {
 
     @Override
     public boolean checkIfBetIsValid(IPlayerCard card, Bet betToCheck) {
-        return false;
+        return card.getCardID() != null;
     }
 }
