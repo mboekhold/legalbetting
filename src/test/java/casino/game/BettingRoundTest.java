@@ -47,4 +47,13 @@ public class BettingRoundTest {
 
     }
 
+    @Test
+    public void placeDuplicateBetShouldReturnFalseAndNotDuplicateBet(){
+        //arrange
+
+        //act
+
+        //assert
+    }
+
 }
