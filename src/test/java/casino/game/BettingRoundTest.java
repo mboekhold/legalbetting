@@ -14,15 +14,19 @@ import static org.mockito.Mockito.*;
 public class BettingRoundTest {
 
     private BettingRoundID bettingRoundID = new IDBuilder().buildBettingRoundId();
+    private IBettingRound bettingRound;
     private BetTokenAuthority betTokenAuthority = mock(BetTokenAuthority.class);
     private Bet bet = mock(Bet.class);
 
+    @Before
+    public void init(){
+        when(betTokenAuthority.getBetToken(bettingRoundID)).thenReturn(new BetToken((bettingRoundID)));
+        bettingRound = new BettingRound(bettingRoundID, betTokenAuthority.getBetToken(bettingRoundID));
+    }
 
     @Test
     public void constructorShouldSetTheBettingRoundIdAndBetToken(){
         //arrange
-        when(betTokenAuthority.getBetToken(bettingRoundID)).thenReturn(new BetToken((bettingRoundID)));
-        IBettingRound bettingRound = new BettingRound(bettingRoundID, betTokenAuthority.getBetToken(bettingRoundID));
         //act
         //assert
         assertNotNull(bettingRound.getBettingRoundID());
@@ -33,7 +37,6 @@ public class BettingRoundTest {
     @Test
     public void placeBetShouldAddBetToPlacedBets(){
         //arrange
-        IBettingRound bettingRound = new BettingRound(bettingRoundID, betTokenAuthority.getBetToken(bettingRoundID));
 
         //act
         bettingRound.placeBet(bet);
