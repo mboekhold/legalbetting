@@ -17,6 +17,7 @@ public class BettingRoundTest {
     private IBettingRound bettingRound;
     private BetTokenAuthority betTokenAuthority = mock(BetTokenAuthority.class);
     private Bet bet = mock(Bet.class);
+    private Bet bet2 = mock(Bet.class);
 
     @Before
     public void init(){
@@ -58,6 +59,12 @@ public class BettingRoundTest {
         //assert
         assertFalse(actual);
         assertEquals(1, bettingRound.getAllBetsMade().size());
+    }
+
+
+    @Test
+    public void numberOfBetsMadeShouldReturnAmountOfBetsInBettingRound(){
+
     }
 
 }
