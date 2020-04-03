@@ -35,13 +35,14 @@ public class BettingRoundTest {
     }
 
     @Test
-    public void placeBetShouldAddBetToPlacedBets(){
+    public void placeBetShouldReturnTrueAndAddedToPlacedBets(){
         //arrange
 
         //act
-        bettingRound.placeBet(bet);
+        boolean added = bettingRound.placeBet(bet);
 
         //assert
+        assertTrue(added);
         assertTrue(bettingRound.getAllBetsMade().size() > 0);
 
     }
