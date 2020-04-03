@@ -8,7 +8,7 @@ import java.util.Map;
 
 public class Cashier implements ICashier {
 
-    Map<Card, MoneyAmount> moneyAmounts = new HashMap<>();
+    Map<IPlayerCard, MoneyAmount> moneyAmounts = new HashMap<>();
 
     @Override
     public IPlayerCard distributeGamblerCard() {
@@ -32,7 +32,7 @@ public class Cashier implements ICashier {
 
     @Override
     public void addAmount(IPlayerCard card, MoneyAmount amount) {
-
+        moneyAmounts.put(card, amount);
     }
 
 }
