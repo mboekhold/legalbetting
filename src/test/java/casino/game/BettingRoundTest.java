@@ -49,11 +49,15 @@ public class BettingRoundTest {
 
     @Test
     public void placeDuplicateBetShouldReturnFalseAndNotDuplicateBet(){
-        //arrange
+       //arrange
 
         //act
+        bettingRound.placeBet(bet);
+        boolean actual = bettingRound.placeBet(bet);
 
         //assert
+        assertFalse(actual);
+        assertEquals(1, bettingRound.getAllBetsMade().size());
     }
 
 }
