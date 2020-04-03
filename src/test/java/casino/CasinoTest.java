@@ -3,6 +3,7 @@ package casino;
 import casino.bet.Bet;
 import casino.cashier.IPlayerCard;
 import casino.game.IGame;
+import casino.idbuilder.IDBuilder;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -40,5 +41,17 @@ public class CasinoTest {
         boolean actual = casino.checkIfBetIsValid(playerCard, bet);
         //assert
         assertFalse(actual);
+    }
+
+    //Our Assumption is that a card is valid if the CardID has been set
+    @Test
+    public void validCardCheckBetShouldReturnTrue(){
+        //arrange
+
+        //act
+        when(playerCard.getCardID()).thenReturn(new IDBuilder().buildCardID());
+        boolean actual = casino.checkIfBetIsValid(playerCard, bet);
+        //assert
+        assertTrue(actual);
     }
 }
