@@ -1,27 +1,25 @@
 package casino.cashier;
 
 import casino.bet.Bet;
+import casino.bet.MoneyAmount;
 import casino.player.Player;
 import org.junit.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.CoreMatchers.is;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 public class CashierTest {
 
-    @Test(expected = Test.None.class)
-    public void checkIfBetIsValid_ValidPlayerAndBetParameter_ReturnTrue() throws BetNotExceptedException {
-        // Arrange
+    @Test
+    public void addAmount_ValidCardAndAmount_MapSizeIsOne() throws BetNotExceptedException{
         Cashier cashier = new Cashier();
         Card card = mock(Card.class);
-        Bet bet = mock(Bet.class);
-        boolean BETISVALID = true;
+        MoneyAmount moneyAmount = mock(MoneyAmount.class);
 
-        // Act
-        Boolean betStatus = cashier.checkIfBetIsValid(card, bet);
+        cashier.addAmount(card, moneyAmount);
 
-        // Assert
-        assertThat(BETISVALID, is(betStatus));
+        assertThat(cashier.moneyAmounts.size(), is(1));
     }
 }

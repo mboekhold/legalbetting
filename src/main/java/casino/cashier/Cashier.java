@@ -3,7 +3,13 @@ package casino.cashier;
 import casino.bet.Bet;
 import casino.bet.MoneyAmount;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class Cashier implements ICashier {
+
+    Map<Card, MoneyAmount> moneyAmounts = new HashMap<>();
+
     @Override
     public IPlayerCard distributeGamblerCard() {
         return null;
@@ -16,11 +22,17 @@ public class Cashier implements ICashier {
 
     @Override
     public boolean checkIfBetIsValid(IPlayerCard card, Bet betToCheck) throws BetNotExceptedException {
-        return true;
+        long cardBalance = moneyAmounts.get(card).getAmountInCents();
+
+       if  (betToCheck.getMoneyAmount().getAmountInCents() > cardBalance) {
+           throw new BetNotExceptedException();
+       }
+       return true;
     }
 
     @Override
     public void addAmount(IPlayerCard card, MoneyAmount amount) {
 
     }
+
 }
