@@ -1,5 +1,6 @@
 package casino.gamingmachine;
 
+import casino.game.Game;
 import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.is;
