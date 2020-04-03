@@ -1,6 +1,7 @@
 package casino.game;
 
 import bettingauthorityAPI.BetToken;
+import bettingauthorityAPI.BetTokenAuthority;
 import casino.bet.Bet;
 import casino.idbuilder.BettingRoundID;
 
@@ -13,6 +14,7 @@ public class BettingRound implements IBettingRound {
 
     public BettingRound(BettingRoundID bettingRoundID) {
         this.bettingRoundID = bettingRoundID;
+        this.betToken = new BetTokenAuthority().getBetToken(bettingRoundID);
     }
 
 
