@@ -22,7 +22,12 @@ public class Cashier implements ICashier {
 
     @Override
     public boolean checkIfBetIsValid(IPlayerCard card, Bet betToCheck) throws BetNotExceptedException {
-        return false;
+        long cardBalance = moneyAmounts.get(card).getAmountInCents();
+
+        if  (betToCheck.getMoneyAmount().getAmountInCents() > cardBalance) {
+            throw new BetNotExceptedException();
+        }
+        return true;
     }
 
     @Override
