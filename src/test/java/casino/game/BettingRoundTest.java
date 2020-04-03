@@ -8,15 +8,23 @@ import static org.junit.Assert.*;
 
 public class BettingRoundTest {
 
+    private BettingRoundID bettingRoundID = new IDBuilder().buildBettingRoundId();
+    private IBettingRound bettingRound = new BettingRound(bettingRoundID);
+
     @Test
-    public void bettingRoundConstructorShouldSetTheBettingRoundId(){
+    public void constructorShouldSetTheBettingRoundId(){
         //arrange
-        BettingRoundID bettingRoundID;
-        BettingRound bettingRound;
         //act
-        bettingRoundID = new IDBuilder().buildBettingRoundId();
-        bettingRound = new BettingRound(bettingRoundID);
         //assert
         assertNotNull(bettingRound.getBettingRoundID());
+    }
+
+    @Test
+    public void constructorShouldSetTheGamblingToken(){
+        //arrange
+
+        //act
+        assertNotNull(bettingRound.getBetToken());
+        //assert
     }
 }
