@@ -1,21 +1,26 @@
 package casino.game;
 
 import bettingauthorityAPI.BetToken;
-import bettingauthorityAPI.BettingRoundID;
 import casino.bet.Bet;
+import casino.idbuilder.BettingRoundID;
 
 import java.util.Set;
 
 public class BettingRound implements IBettingRound {
 
+    private BetToken betToken;
+    private BettingRoundID bettingRoundID;
 
-    public BettingRound() {
+    public BettingRound(BettingRoundID bettingRoundID) {
+        this.bettingRoundID = bettingRoundID;
     }
+
+
 
 
     @Override
     public BettingRoundID getBettingRoundID() {
-        return null;
+        return bettingRoundID;
     }
 
     @Override
@@ -30,7 +35,7 @@ public class BettingRound implements IBettingRound {
 
     @Override
     public BetToken getBetToken() {
-        return null;
+        return betToken;
     }
 
     @Override
