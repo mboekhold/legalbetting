@@ -1,16 +1,16 @@
 package casino.idbuilder;
 
+import java.time.LocalDateTime;
+import java.util.UUID;
+
 public abstract class GeneralID {
 
     private String timeStamp;
     private String uniqueID;
 
-    public GeneralID(String timeStamp, String uniqueID) {
-        this.timeStamp = timeStamp;
-        this.uniqueID = uniqueID;
-    }
-
     public GeneralID() {
+        this.timeStamp = LocalDateTime.now().toString();
+        this.uniqueID = UUID.randomUUID().toString();
     }
 
     public String getTimeStamp() {

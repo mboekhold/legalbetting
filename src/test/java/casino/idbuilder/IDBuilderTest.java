@@ -7,7 +7,7 @@ import static org.junit.Assert.*;
 public class IDBuilderTest {
 
     @Test
-    public void buildCardIDTest_ShouldReturnValidCardID(){
+    public void buildIDTest_ShouldReturnValidGeneralID(){
         //arrange
         IDBuilder builder = new IDBuilder();
         //act

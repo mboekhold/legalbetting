@@ -15,7 +15,7 @@ public class IDBuilder {
     }
 
     public CardID buildCardID(){
-        return null;
+        return new CardID();
     }
 
     public GamingMachineID buildMachineId(){
