@@ -1,5 +1,7 @@
 package casino;
 
+import casino.bet.Bet;
+import casino.cashier.IPlayerCard;
 import casino.game.IGame;
 import org.junit.Test;
 
@@ -11,10 +13,13 @@ import static org.junit.Assert.*;
 public class CasinoTest {
 
     private IGame validGame = mock(IGame.class);
+    private Bet bet = mock(Bet.class);
+    private IPlayerCard playerCard = mock(IPlayerCard.class);
+    private ICasino casino = new Casino();
+
     @Test
     public void retrieveGameByNameShouldReturnValidGame(){
         //arrange
-        ICasino casino = new Casino();
 
         //act
         String gameName = "candy crush";
@@ -24,5 +29,16 @@ public class CasinoTest {
         //assert
         assertEquals(validGame, game);
 
+    }
+
+    //Our Assumption is that a card is invalid if the CardID has not been set
+    @Test
+    public void invalidCardCheckBetShouldReturnFalse(){
+        //arrange
+
+        //act
+        boolean actual = casino.checkIfBetIsValid(playerCard, bet);
+        //assert
+        assertFalse(actual);
     }
 }
