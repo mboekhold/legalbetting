@@ -20,7 +20,9 @@ public class Card implements IPlayerCard {
 
     @Override
     public Set<BetID> returnBetIDsAndClearCard() {
-        return betIDs;
+        Set<BetID> copy = new HashSet<>(betIDs);
+        betIDs.clear();
+        return copy;
     }
 
     @Override
