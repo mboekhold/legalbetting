@@ -36,7 +36,7 @@ public class GamingMachine implements IGamingMachine {
         } catch (BetNotExceptedException e) {
             return false;
         }
-        return false;
+        return true;
     }
 
     @Override

@@ -70,13 +70,15 @@ public class GamingMachineTest {
     }
 
     @Test
-    public void placeBet_BetTooBigForPlayerCard_ReturnFalse() throws NoPlayerCardException {
+    public void placeBet_BetTooBigForPlayerCard_ReturnFalse() throws NoPlayerCardException, BetNotExceptedException {
         // Arrange
         IGame game = mock(IGame.class);
         IPlayerCard card = mock(IPlayerCard.class);
         ICashier cashier = mock(Cashier.class);
         GamingMachine gamingMachine = new GamingMachine(game, cashier);
         gamingMachine.connectCard(card);
+        Bet bet =  new Bet(new BetID(new UUID(123,123)), new MoneyAmount((long) 100.0));
+        when(cashier.checkIfBetIsValid(card, bet)).thenThrow(BetNotExceptedException.class);
         // Act
         Boolean CanBetBePlace = gamingMachine.placeBet((long) 100.0);
 
@@ -92,8 +94,9 @@ public class GamingMachineTest {
         ICashier cashier = mock(Cashier.class);
         GamingMachine gamingMachine = new GamingMachine(game, cashier);
         gamingMachine.connectCard(card);
+
         // Act
-        Boolean CanBetBePlace = gamingMachine.placeBet((long) -1.0);
+        Boolean CanBetBePlace = gamingMachine.placeBet((long) 0.0);
 
         // Assert
         assertThat(CanBetBePlace, is(true));

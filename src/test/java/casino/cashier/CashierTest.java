@@ -47,7 +47,5 @@ public class CashierTest {
         when(bet.getMoneyAmount().getAmountInCents()).thenReturn((long) 10.0);
 
         Boolean ValidBet = cashier.checkIfBetIsValid(card, bet);
-
-        assertThat(ValidBet, is(true));
     }
 }
