@@ -76,8 +76,9 @@ public class GamingMachineTest {
         IPlayerCard card = mock(IPlayerCard.class);
         ICashier cashier = mock(Cashier.class);
         GamingMachine gamingMachine = new GamingMachine(game, cashier);
+        gamingMachine.connectCard(card);
         // Act
-        Boolean CanBetBePlace = gamingMachine.placeBet((long) 10.0);
+        Boolean CanBetBePlace = gamingMachine.placeBet((long) 100.0);
 
         // Assert
         assertThat(CanBetBePlace, is(false));

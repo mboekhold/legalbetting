@@ -18,4 +18,5 @@ public class MoneyAmount {
     public long getAmountInCents() {
         return amountInCents;
     }
+
 }
