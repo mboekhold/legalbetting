@@ -1,11 +1,16 @@
 package casino.gamingmachine;
 
 import casino.bet.Bet;
+import casino.bet.BetID;
+import casino.bet.MoneyAmount;
 import casino.cashier.BetNotExceptedException;
 import casino.cashier.Cashier;
+import casino.cashier.ICashier;
 import casino.cashier.IPlayerCard;
 import casino.game.IGame;
 import org.junit.Test;
+
+import java.util.UUID;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -16,10 +21,10 @@ public class GamingMachineTest {
     @Test
     public void gamingMachineConstructor_GameIsSet() {
         // Arrange
-       IGame game = mock(IGame.class);
-
+        IGame game = mock(IGame.class);
+        ICashier cashier = mock(Cashier.class);
         // Act
-        GamingMachine gamingMachine = new GamingMachine(game);
+        GamingMachine gamingMachine = new GamingMachine(game, cashier);
 
         // Assert
         assertThat(game, is(gamingMachine.getGame()));
@@ -30,7 +35,8 @@ public class GamingMachineTest {
         // Arrange
         IGame game = mock(IGame.class);
         IPlayerCard card = mock(IPlayerCard.class);
-        GamingMachine gamingMachine = new GamingMachine(game);
+        ICashier cashier = mock(Cashier.class);
+        GamingMachine gamingMachine = new GamingMachine(game, cashier);
         // Act
         gamingMachine.connectCard(card);
         // Assert
@@ -38,13 +44,13 @@ public class GamingMachineTest {
     }
 
     @Test
-    public void placeBet_ValidAmount_CashierCheckIfBetIsValidCAlled() throws NoPlayerCardException, BetNotExceptedException {
+    public void placeBet_ValidAmount_CashierCheckIfBetIsValidCalled() throws NoPlayerCardException, BetNotExceptedException {
         // Arrange
         IGame game = mock(IGame.class);
         Cashier cashier = mock(Cashier.class);
         IPlayerCard card = mock(IPlayerCard.class);
-        Bet bet = mock(Bet.class);
-        GamingMachine gamingMachine = new GamingMachine(game);
+        Bet bet =  new Bet(new BetID(new UUID(123,123)), new MoneyAmount((long) -1.0));
+        GamingMachine gamingMachine = new GamingMachine(game, cashier);
         gamingMachine.connectCard(card);
         // Act
         gamingMachine.placeBet((long) -1.0);
