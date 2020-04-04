@@ -58,4 +58,15 @@ public class GamingMachineTest {
         verify(cashier).checkIfBetIsValid(card, bet);
     }
 
+    @Test(expected = NoPlayerCardException.class)
+    public void placeBet_NoPlayerCard_NoPlayerCardException() throws NoPlayerCardException {
+        // Arrange
+        IGame game = mock(IGame.class);
+        IPlayerCard card = mock(IPlayerCard.class);
+        ICashier cashier = mock(Cashier.class);
+        GamingMachine gamingMachine = new GamingMachine(game, cashier);
+        // Act
+        gamingMachine.placeBet((long) -1.0);
+    }
+
 }
