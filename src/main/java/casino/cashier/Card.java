@@ -7,7 +7,11 @@ import java.util.Set;
 
 public class Card implements IPlayerCard {
 
-    Set<BetID> betIDs = new HashSet<>();
+    Set<BetID> betIDs;
+
+    public Card() {
+        this.betIDs = new HashSet<>();
+    }
 
     @Override
     public Set<BetID> returnBetIDs() {

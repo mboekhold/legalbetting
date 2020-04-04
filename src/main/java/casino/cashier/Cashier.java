@@ -12,7 +12,7 @@ public class Cashier implements ICashier {
 
     @Override
     public IPlayerCard distributeGamblerCard() {
-        return null;
+        return new Card();
     }
 
     @Override

@@ -1,13 +1,17 @@
 package casino.cashier;
 
 import casino.bet.Bet;
+import casino.bet.BetID;
 import casino.bet.MoneyAmount;
 import org.junit.Test;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
+
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.CoreMatchers.is;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 public class CashierTest {
 
@@ -58,5 +62,17 @@ public class CashierTest {
         IPlayerCard card = cashier.distributeGamblerCard();
         // Assert
         assertThat(card, is(IPlayerCard.class));
+    }
+
+    @Test
+    public void returnGamblerCard_returnBetIDsAndClearCardCalled() {
+        // Arrange
+        Cashier cashier = new Cashier();
+        IPlayerCard card = mock(Card.class);
+        // Act
+        cashier.returnGamblerCard(card);
+
+        // Assert
+        verify(card).returnBetIDsAndClearCard();
     }
 }
