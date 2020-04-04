@@ -1,5 +1,6 @@
 package casino.gamingmachine;
 
+import casino.cashier.IPlayerCard;
 import casino.game.IGame;
 import org.junit.Test;
 
@@ -19,6 +20,18 @@ public class GamingMachineTest {
 
         // Assert
         assertThat(game, is(gamingMachine.getGame()));
+    }
+
+    @Test
+    public void connectCard_ValidCard_CardFieldSet() {
+        // Arrange
+        IGame game = mock(IGame.class);
+        IPlayerCard card = mock(IPlayerCard.class);
+        GamingMachine gamingMachine = new GamingMachine(game);
+        // Act
+        gamingMachine.connectCard(card);
+        // Assert
+        assertThat(card, is(gamingMachine.getCard()));
     }
 
 }
