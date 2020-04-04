@@ -1,7 +1,6 @@
 package casino.gamingmachine;
 
 import bettingauthorityAPI.GamingMachineID;
-import casino.bet.Bet;
 import casino.bet.BetResult;
 import casino.cashier.IPlayerCard;
 import casino.game.IGame;
