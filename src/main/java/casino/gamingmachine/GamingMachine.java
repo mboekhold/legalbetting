@@ -9,6 +9,8 @@ import casino.game.IGame;
 public class GamingMachine implements IGamingMachine {
     private IGame game;
 
+    private IPlayerCard card;
+
     public GamingMachine(IGame game) {
         this.game = game;
     }
@@ -35,6 +37,10 @@ public class GamingMachine implements IGamingMachine {
 
     @Override
     public void connectCard(IPlayerCard card) {
+        this.card = card;
+    }
 
+    public IPlayerCard getCard() {
+        return card;
     }
 }
