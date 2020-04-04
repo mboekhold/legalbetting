@@ -90,4 +90,18 @@ public class CashierTest {
         // Assert
         assertThat(cashier.getLogsSize(), is(1));
     }
+
+    @Test
+    public void returnGamblerCard_ClearAllMoneyAmountsLinkedToCardInHashMap() {
+        // Arrange
+        Cashier cashier = new Cashier();
+        IPlayerCard card = mock(IPlayerCard.class);
+        cashier.addAmount(card, new MoneyAmount(123));
+
+        // Act
+        cashier.returnGamblerCard(card);
+
+        // Assert
+        assertThat(cashier.getAmountOfMoneyOnCard(card), isNotNull());
+    }
 }

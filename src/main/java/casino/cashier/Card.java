@@ -22,6 +22,7 @@ public class Card implements IPlayerCard {
     public Set<BetID> returnBetIDsAndClearCard() {
         Set<BetID> copy = new HashSet<>(betIDs);
         betIDs.clear();
+
         return copy;
     }
 

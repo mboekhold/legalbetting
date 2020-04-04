@@ -46,4 +46,5 @@ public class Cashier implements ICashier {
         moneyAmounts.put(card, amount);
     }
 
+
 }
