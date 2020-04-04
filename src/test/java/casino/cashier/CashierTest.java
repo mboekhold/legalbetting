@@ -48,4 +48,15 @@ public class CashierTest {
 
         Boolean ValidBet = cashier.checkIfBetIsValid(card, bet);
     }
+
+    @Test
+    public void distributeGamblerCard_ReturnValidPlayerCard() {
+        // Arrange
+        Cashier cashier = new Cashier();
+
+        // Act
+        IPlayerCard card = cashier.distributeGamblerCard();
+        // Assert
+        assertThat(card, is(IPlayerCard.class));
+    }
 }
