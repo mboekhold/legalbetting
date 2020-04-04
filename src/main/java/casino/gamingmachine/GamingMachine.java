@@ -34,7 +34,7 @@ public class GamingMachine implements IGamingMachine {
         try {
             cashier.checkIfBetIsValid(card, bet);
         } catch (BetNotExceptedException e) {
-            return false;
+            e.printStackTrace();
         }
         return false;
     }

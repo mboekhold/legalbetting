@@ -69,4 +69,17 @@ public class GamingMachineTest {
         gamingMachine.placeBet((long) -1.0);
     }
 
+    @Test
+    public void placeBet_BetTooBigForPlayerCard_ReturnFalse() throws NoPlayerCardException {
+        // Arrange
+        IGame game = mock(IGame.class);
+        IPlayerCard card = mock(IPlayerCard.class);
+        ICashier cashier = mock(Cashier.class);
+        GamingMachine gamingMachine = new GamingMachine(game, cashier);
+        // Act
+        Boolean CanBetBePlace = gamingMachine.placeBet((long) 10.0);
+
+        // Assert
+        assertThat(CanBetBePlace, is(false));
+    }
 }
