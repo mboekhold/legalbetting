@@ -83,4 +83,19 @@ public class GamingMachineTest {
         // Assert
         assertThat(CanBetBePlace, is(false));
     }
+
+    @Test
+    public void placeBet_ValidBetAndPlayerCard_ReturnTrue() throws NoPlayerCardException {
+        // Arrange
+        IGame game = mock(IGame.class);
+        IPlayerCard card = mock(IPlayerCard.class);
+        ICashier cashier = mock(Cashier.class);
+        GamingMachine gamingMachine = new GamingMachine(game, cashier);
+        gamingMachine.connectCard(card);
+        // Act
+        Boolean CanBetBePlace = gamingMachine.placeBet((long) -1.0);
+
+        // Assert
+        assertThat(CanBetBePlace, is(true));
+    }
 }
