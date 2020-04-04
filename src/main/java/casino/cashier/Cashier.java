@@ -1,15 +1,19 @@
 package casino.cashier;
 
 import casino.bet.Bet;
+import casino.bet.BetID;
 import casino.bet.MoneyAmount;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
 public class Cashier implements ICashier {
 
     Map<IPlayerCard, MoneyAmount> moneyAmounts = new HashMap<>();
+
+    Set<BetID> Logs = new HashSet<>();
 
     @Override
     public IPlayerCard distributeGamblerCard() {
@@ -18,7 +22,8 @@ public class Cashier implements ICashier {
 
     @Override
     public void returnGamblerCard(IPlayerCard card) {
-        Set BetIDs = card.returnBetIDsAndClearCard();
+        Set<BetID> BetIDs = card.returnBetIDsAndClearCard();
+        Logs.addAll(BetIDs);
     }
 
     @Override
@@ -30,6 +35,10 @@ public class Cashier implements ICashier {
         }
 
         return true;
+    }
+
+    public int getLogsSize() {
+        return Logs.size();
     }
 
     @Override
