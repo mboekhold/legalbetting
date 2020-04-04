@@ -3,6 +3,9 @@ package casino.cashier;
 import casino.bet.BetID;
 import org.junit.Test;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import static org.hamcrest.CoreMatchers.is;
 import static org.mockito.Mockito.*;
 import static org.junit.Assert.*;
@@ -22,4 +25,18 @@ public class CardTest {
         // Assert
         assertThat(AMOUNTOFBETS, is(card.getNumberOfBetIDs()));
     }
+
+    @Test
+    public void returnBetIDsAndClearCard_AddedOneBetToCard_BetIdSetIsSizeOne() {
+        // Arrange
+        Card card = new Card();
+        BetID betID = mock(BetID.class);
+        card.addBetID(betID);
+
+        // Act
+        Set<BetID> betIDs = card.returnBetIDsAndClearCard();
+        // Assert
+        assertThat(betIDs.size(), is(1));
+    }
+
 }

@@ -19,7 +19,7 @@ public class CashierTest {
     public void addAmount_ValidCardAndAmount_MapSizeIsOne() {
         // Arrange
         Cashier cashier = new Cashier();
-        Card card = mock(Card.class);
+        IPlayerCard card = mock(IPlayerCard.class);
         MoneyAmount moneyAmount = mock(MoneyAmount.class);
         // Acr
         cashier.addAmount(card, moneyAmount);
@@ -30,7 +30,7 @@ public class CashierTest {
     @Test
     public void checkIfBetIsValid_ValidCardAndBet_ReturnTrue() throws BetNotExceptedException{
         Cashier cashier = new Cashier();
-        Card card = mock(Card.class);
+        IPlayerCard card = mock(IPlayerCard.class);
         Bet bet = mock(Bet.class);
         cashier.addAmount(card, mock(MoneyAmount.class));
         when(bet.getMoneyAmount()).thenReturn(mock(MoneyAmount.class));
@@ -44,7 +44,7 @@ public class CashierTest {
     @Test(expected = BetNotExceptedException.class)
     public void checkIfBetIsValid_ValidCardAndBettTooHigh_ThrowException() throws BetNotExceptedException{
         Cashier cashier = new Cashier();
-        Card card = mock(Card.class);
+        IPlayerCard card = mock(IPlayerCard.class);
         Bet bet = mock(Bet.class);
         cashier.addAmount(card, mock(MoneyAmount.class));
         when(bet.getMoneyAmount()).thenReturn(mock(MoneyAmount.class));
@@ -68,7 +68,7 @@ public class CashierTest {
     public void returnGamblerCard_returnBetIDsAndClearCardCalled() {
         // Arrange
         Cashier cashier = new Cashier();
-        IPlayerCard card = mock(Card.class);
+        IPlayerCard card = mock(IPlayerCard.class);
         // Act
         cashier.returnGamblerCard(card);
 
@@ -80,7 +80,7 @@ public class CashierTest {
     public void returnGamblerCard_BetIDsAreLoggedBetIDsSizeIsOne() {
         // Arrange
         Cashier cashier = new Cashier();
-        IPlayerCard card = mock(Card.class);
+        IPlayerCard card = mock(IPlayerCard.class);
         Set<BetID> BetIds = new HashSet<>();
         BetIds.add(new BetID(new UUID(123,123)));
         when(card.returnBetIDsAndClearCard()).thenReturn(BetIds);
