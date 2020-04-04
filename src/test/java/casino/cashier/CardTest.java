@@ -39,4 +39,17 @@ public class CardTest {
         assertThat(betIDs.size(), is(1));
     }
 
+    @Test
+    public void returnBetIDsAndClearCard_AddedOneBetToCard_BetIDsSizeResetToZero() {
+        // Arrange
+        Card card = new Card();
+        BetID betID = mock(BetID.class);
+        card.addBetID(betID);
+
+        // Act
+        Set<BetID> betIDs = card.returnBetIDsAndClearCard();
+        // Assert
+        assertThat(card.betIDs.size(), is(0));
+    }
+
 }
