@@ -24,6 +24,7 @@ public class Cashier implements ICashier {
     public void returnGamblerCard(IPlayerCard card) {
         Set<BetID> BetIDs = card.returnBetIDsAndClearCard();
         Logs.addAll(BetIDs);
+        moneyAmounts.remove(card);
     }
 
     @Override
@@ -47,4 +48,7 @@ public class Cashier implements ICashier {
     }
 
 
+    long getAmountOfMoneyOnCard(IPlayerCard card) {
+        return moneyAmounts.get(card) != null ? moneyAmounts.get(card).getAmountInCents(): 0;
+    }
 }

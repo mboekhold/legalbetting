@@ -57,4 +57,5 @@ public class GamingMachine implements IGamingMachine {
     public IPlayerCard getCard() {
         return card;
     }
+
 }

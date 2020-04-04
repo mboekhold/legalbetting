@@ -102,6 +102,6 @@ public class CashierTest {
         cashier.returnGamblerCard(card);
 
         // Assert
-        assertThat(cashier.getAmountOfMoneyOnCard(card), isNotNull());
+        assertThat(cashier.getAmountOfMoneyOnCard(card), is((long) 0));
     }
 }
