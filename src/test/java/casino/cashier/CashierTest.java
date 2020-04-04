@@ -75,4 +75,18 @@ public class CashierTest {
         // Assert
         verify(card).returnBetIDsAndClearCard();
     }
+
+    @Test
+    public void returnGamblerCard_BetIDsAreLogged() {
+        // Arrange
+        Cashier cashier = new Cashier();
+        IPlayerCard card = mock(Card.class);
+        Set<BetID> BetIds = new HashSet<>();
+        when(card.returnBetIDsAndClearCard()).thenReturn(BetIds);
+        // Act
+        cashier.returnGamblerCard(card);
+
+        // Assert
+        verify(cashier).getLogs().addAll(BetIds);
+    }
 }

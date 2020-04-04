@@ -5,6 +5,7 @@ import casino.bet.MoneyAmount;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 public class Cashier implements ICashier {
 
@@ -17,7 +18,7 @@ public class Cashier implements ICashier {
 
     @Override
     public void returnGamblerCard(IPlayerCard card) {
-        card.returnBetIDsAndClearCard();
+        Set BetIDs = card.returnBetIDsAndClearCard();
     }
 
     @Override
