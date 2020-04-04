@@ -29,6 +29,7 @@ public class GamingMachine implements IGamingMachine {
 
     @Override
     public boolean placeBet(long amountInCents) throws NoPlayerCardException {
+        if (card == null) throw new NoPlayerCardException();
         Bet bet = new Bet(new BetID(new UUID(123,123)), new MoneyAmount(amountInCents));
         try {
             cashier.checkIfBetIsValid(card, bet);
