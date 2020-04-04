@@ -20,7 +20,7 @@ public class Card implements IPlayerCard {
 
     @Override
     public Set<BetID> returnBetIDsAndClearCard() {
-        return null;
+        return betIDs;
     }
 
     @Override
