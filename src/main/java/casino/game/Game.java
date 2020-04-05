@@ -67,6 +67,13 @@ public class Game extends AbstractGame{
 
     @Override
     public BetResult determineWinner(Integer randomWinValue, Set<Bet> bets) {
+        int counter = 0;
+        for(Bet b : bets){
+            if (randomWinValue == counter) {
+                return new BetResult(b, b.getMoneyAmount());
+            }
+            counter++;
+        }
         return null;
     }
 

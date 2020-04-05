@@ -106,8 +106,8 @@ public class GameTest {
         BetTokenAuthority betTokenAuthority = Mockito.mock(BetTokenAuthority.class);
 
         //act
-        when(betTokenAuthority.getRandomInteger(game.getCurrentBettingRound().getBetToken())).thenReturn(1);
         game.startBettingRound();
+        when(betTokenAuthority.getRandomInteger(game.getCurrentBettingRound().getBetToken())).thenReturn(Integer.valueOf(1));
         game.acceptBet(bet1, gamingMachine);
         game.acceptBet(bet2, gamingMachine);
         game.acceptBet(bet3, gamingMachine);
@@ -115,8 +115,7 @@ public class GameTest {
         BetResult betResult = game.determineWinner(betTokenAuthority.getRandomInteger
                 (game.getCurrentBettingRound().getBetToken()), game.getCurrentBettingRound().getAllBetsMade());
         //assert
-        int counter = 0;
-        Assert.assertTrue(betResult.getWinningBet() == bet1);
+        Assert.assertTrue(betResult.getWinningBet() == bet2);
     }
 
 
