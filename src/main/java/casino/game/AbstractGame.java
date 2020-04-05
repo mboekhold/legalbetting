@@ -8,8 +8,11 @@ import java.util.Set;
 public class AbstractGame implements IGame, IGameRule {
 
     private int maxBetsPerRound;
+    private boolean isBettingRoundStarted;
+
     public AbstractGame(int maxBetsPerRound){
         this.maxBetsPerRound = maxBetsPerRound;
+        isBettingRoundStarted = false;
     }
 
     @Override
@@ -24,7 +27,7 @@ public class AbstractGame implements IGame, IGameRule {
 
     @Override
     public boolean isBettingRoundFinished() {
-        return false;
+        return isBettingRoundStarted;
     }
 
     @Override
