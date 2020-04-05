@@ -62,6 +62,17 @@ public class GameTest {
         Assert.assertTrue(result);
     }
 
+    @Test(expected = NoCurrentRoundException.class)
+    public void acceptValidBetWhenGameIsNotStartedShouldThrowNoCurrentRoundException() throws NoCurrentRoundException {
+        //act
+        Bet bet = Mockito.mock(Bet.class);
+        //arrange
+        game.startBettingRound();
+        game.endBettingRound();
+        game.acceptBet(bet, gamingMachine);
+        //assert
+    }
+
 
 
 
