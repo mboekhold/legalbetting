@@ -73,6 +73,26 @@ public class GameTest {
         //assert
     }
 
+    @Test
+    public void acceptValidBetsShouldNotExceedTheMaxBetNumberPerRound() throws NoCurrentRoundException {
+        //act
+        Bet bet1 = Mockito.mock(Bet.class);
+        Bet bet2 = Mockito.mock(Bet.class);
+        Bet bet3 = Mockito.mock(Bet.class);
+        Bet bet4 = Mockito.mock(Bet.class);
+        //arrange
+        game.startBettingRound();
+        boolean bet1Result = game.acceptBet(bet1, gamingMachine);
+        boolean bet2Result = game.acceptBet(bet2, gamingMachine);
+        boolean bet3Result = game.acceptBet(bet3, gamingMachine);
+        boolean bet4Result = game.acceptBet(bet4, gamingMachine);
+        //assert
+        Assert.assertTrue(bet1Result);
+        Assert.assertTrue(bet2Result);
+        Assert.assertTrue(bet3Result);
+        Assert.assertFalse(bet4Result);
+    }
+
 
 
 
