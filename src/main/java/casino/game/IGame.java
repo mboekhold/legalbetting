@@ -15,7 +15,7 @@ public interface IGame {
 
     /**
      * create and start a new BettingRound.
-     * when called when a current bettinground is active: the current bettinground ends and a new
+     * called when a current bettinground is active: the current bettinground ends and a new
      * bettinground is created, which becomes the current bettinground.
      *
      */
