@@ -17,7 +17,7 @@ public class AbstractGame implements IGame, IGameRule {
 
     @Override
     public void startBettingRound() {
-
+        this.isBettingRoundStarted = true;
     }
 
     @Override
