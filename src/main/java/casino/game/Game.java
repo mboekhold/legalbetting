@@ -15,16 +15,15 @@ public class Game extends AbstractGame{
     Set<IBettingRound> bettingRounds;
     private BettingAuthority bettingAuthority;
     private boolean isBettingRoundStarted;
+    private BettingRound currentBettingRound;
+    private IDBuilder builder;
 
 
     public Game() {
         bettingRounds = new HashSet<>();
         bettingAuthority = new BettingAuthority();
-        IDBuilder builder = new IDBuilder();
-        BettingRoundID bettingRoundID = builder.buildBettingRoundId();
-        BetToken betToken = bettingAuthority.getTokenAuthority().getBetToken(bettingRoundID);
-        bettingRounds.add(new BettingRound(bettingRoundID, betToken));
         isBettingRoundStarted = false;
+        builder = new IDBuilder();
     }
 
     public int getAmountOfBettingRounds(){
@@ -34,6 +33,10 @@ public class Game extends AbstractGame{
     @Override
     public void startBettingRound() {
         isBettingRoundStarted = true;
+        BettingRoundID bettingRoundID = builder.buildBettingRoundId();
+        BetToken betToken = bettingAuthority.getTokenAuthority().getBetToken(bettingRoundID);
+        currentBettingRound = new BettingRound(bettingRoundID, betToken);
+        bettingRounds.add(currentBettingRound);
     }
 
     @Override
@@ -47,11 +50,20 @@ public class Game extends AbstractGame{
     }
 
     @Override
+    public int getMaxBetsPerRound() {
+        return super.getMaxBetsPerRound();
+    }
+
+    @Override
     public boolean acceptBet(Bet bet, IGamingMachine gamingMachine) throws NoCurrentRoundException {
-       if (isBettingRoundStarted){
+       if (isBettingRoundStarted && getMaxBetsPerRound() > currentBettingRound.numberOFBetsMade()){
+           currentBettingRound.placeBet(bet);
            return true;
        }
-       throw new NoCurrentRoundException("Game has no active round");
+       else if (!isBettingRoundStarted){
+           throw new NoCurrentRoundException("Game has no active round");
+       }
+        return false;
     }
 
 }
