@@ -1,8 +1,8 @@
 package casino.game;
 
 import bettingauthorityAPI.BetToken;
-import bettingauthorityAPI.BettingRoundID;
 import casino.bet.Bet;
+import casino.idbuilder.BettingRoundID;
 
 import java.util.Set;
 

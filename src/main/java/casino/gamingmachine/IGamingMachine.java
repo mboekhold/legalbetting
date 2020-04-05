@@ -1,8 +1,8 @@
 package casino.gamingmachine;
 
-import bettingauthorityAPI.GamingMachineID;
 import casino.bet.BetResult;
 import casino.cashier.IPlayerCard;
+import casino.idbuilder.GamingMachineID;
 
 public interface IGamingMachine {
     /**

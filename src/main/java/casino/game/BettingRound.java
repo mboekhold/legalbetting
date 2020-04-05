@@ -1,20 +1,26 @@
 package casino.game;
 
 import bettingauthorityAPI.BetToken;
-import bettingauthorityAPI.BettingRoundID;
 import casino.bet.Bet;
+import casino.idbuilder.BettingRoundID;
 
 import java.util.HashSet;
 import java.util.Set;
 
 public class BettingRound implements IBettingRound {
+
+    private BetToken betToken;
     private BettingRoundID bettingRoundID;
     private Set<Bet> bets;
 
-    public BettingRound() {
-        bettingRoundID = new BettingRoundID();
-        bets = new HashSet<>();
+    public BettingRound(BettingRoundID bettingRoundID, BetToken betToken) {
+        this.bettingRoundID = bettingRoundID;
+        this.betToken = betToken;
+        this.bets = new HashSet<>();
     }
+
+
+
 
     @Override
     public BettingRoundID getBettingRoundID() {
@@ -23,22 +29,21 @@ public class BettingRound implements IBettingRound {
 
     @Override
     public boolean placeBet(Bet bet) {
-        this.bets.add(bet);
-        return true;
+        return bets.add(bet);
     }
 
     @Override
     public Set<Bet> getAllBetsMade() {
-        return this.bets;
+        return (Set<Bet>) bets;
     }
 
     @Override
     public BetToken getBetToken() {
-        return null;
+        return betToken;
     }
 
     @Override
     public int numberOFBetsMade() {
-        return 0;
+        return bets.size();
     }
 }

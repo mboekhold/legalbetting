@@ -1,9 +1,12 @@
 package bettingauthorityAPI;
 
 import casino.bet.Bet;
-import casino.bet.BetID;
 import casino.bet.BetResult;
 import casino.game.IBettingRound;
+import casino.idbuilder.BetID;
+import casino.idbuilder.BettingRoundID;
+import casino.idbuilder.GamingMachineID;
+import casino.idbuilder.GeneralID;
 
 import java.util.Set;
 
