@@ -48,6 +48,6 @@ public class Game extends AbstractGame{
 
     @Override
     public boolean acceptBet(Bet bet, IGamingMachine gamingMachine) throws NoCurrentRoundException {
-        return false;
+       return true;
     }
 }
