@@ -34,4 +34,14 @@ public class Game extends AbstractGame{
     public void startBettingRound() {
         isBettingRoundStarted = true;
     }
+
+    @Override
+    public void endBettingRound() {
+
+    }
+
+    @Override
+    public boolean isBettingRoundFinished() {
+        return !isBettingRoundStarted;
+    }
 }

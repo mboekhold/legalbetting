@@ -20,7 +20,7 @@ public class GameTest {
 
         Assert.assertEquals(expectedBettingRounds, game.getAmountOfBettingRounds());
         Assert.assertEquals(expectedMaxBets, game.getMaxBetsPerRound());
-        Assert.assertFalse(game.isBettingRoundFinished());
+        Assert.assertTrue(game.isBettingRoundFinished());
     }
 
     @Test
@@ -33,6 +33,17 @@ public class GameTest {
 
         //assert
         Assert.assertFalse(game.isBettingRoundFinished());
+    }
+
+    @Test
+    public void stopBettingRoundShouldSetTheBettingRoundFinishedToTrue(){
+        //act
+
+        //arrange
+        game.startBettingRound();
+        game.endBettingRound();
+        //assert
+        Assert.assertTrue(game.isBettingRoundFinished());
     }
 
 
