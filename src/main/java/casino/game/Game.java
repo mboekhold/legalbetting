@@ -12,6 +12,7 @@ public class Game extends AbstractGame{
 
     Set<IBettingRound> bettingRounds;
     private BettingAuthority bettingAuthority;
+    private boolean isBettingRoundStarted;
 
 
     public Game(int maxBetsPerRound) {
@@ -22,6 +23,7 @@ public class Game extends AbstractGame{
         BettingRoundID bettingRoundID = builder.buildBettingRoundId();
         BetToken betToken = bettingAuthority.getTokenAuthority().getBetToken(bettingRoundID);
         bettingRounds.add(new BettingRound(bettingRoundID, betToken));
+        isBettingRoundStarted = false;
     }
 
     public int getAmountOfBettingRounds(){
@@ -30,6 +32,6 @@ public class Game extends AbstractGame{
 
     @Override
     public void startBettingRound() {
-
+        isBettingRoundStarted = true;
     }
 }

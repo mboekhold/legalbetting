@@ -16,13 +16,26 @@ public class GameTest {
         //arrange
         int expectedBettingRounds = 1;
         int expectedMaxBets = 12;
-        boolean expectedBettingRoundFinished = false;
         //assert
 
         Assert.assertEquals(expectedBettingRounds, game.getAmountOfBettingRounds());
         Assert.assertEquals(expectedMaxBets, game.getMaxBetsPerRound());
-        Assert.assertEquals(expectedBettingRoundFinished, game.isBettingRoundFinished());
+        Assert.assertFalse(game.isBettingRoundFinished());
     }
+
+    @Test
+    public void startRoundShouldSetIsBettingRoundFinishedToFalse(){
+        //We assume games will automatically start with on the first round
+        //act
+
+        //arrange
+        game.startBettingRound();
+
+        //assert
+        Assert.assertFalse(game.isBettingRoundFinished());
+    }
+
+
 
 
 }

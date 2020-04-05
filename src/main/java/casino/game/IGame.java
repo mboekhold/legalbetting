@@ -21,6 +21,8 @@ public interface IGame {
      */
     void startBettingRound();
 
+    void endBettingRound();
+
     /**
      * Accept a bet on the current betting round.
      *
