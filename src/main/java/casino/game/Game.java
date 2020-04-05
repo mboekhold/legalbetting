@@ -67,7 +67,7 @@ public class Game extends AbstractGame{
 
     @Override
     public BetResult determineWinner(Integer randomWinValue, Set<Bet> bets) {
-        return super.determineWinner(randomWinValue, bets);
+        return null;
     }
 
     @Override
