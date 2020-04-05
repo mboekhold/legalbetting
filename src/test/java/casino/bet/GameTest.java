@@ -10,14 +10,19 @@ public class GameTest {
     private Game game = new Game(12);
 
     @Test
-    public void gameConstructorShouldSetTheInitialRound(){
+    public void gameConstructorShouldSetTheInitialRoundAndFields(){
         //act
 
         //arrange
         int expectedBettingRounds = 1;
+        int expectedMaxBets = 12;
+        boolean expectedBettingRoundFinished = false;
         //assert
 
         Assert.assertEquals(expectedBettingRounds, game.getAmountOfBettingRounds());
+        Assert.assertEquals(expectedMaxBets, game.getMaxBetsPerRound());
+        Assert.assertEquals(expectedBettingRoundFinished, game.isBettingRoundFinished());
     }
+
 
 }

@@ -28,7 +28,8 @@ public class Game extends AbstractGame{
         return bettingRounds.size();
     }
 
+    @Override
+    public void startBettingRound() {
 
-
-
+    }
 }

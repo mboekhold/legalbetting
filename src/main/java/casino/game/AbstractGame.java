@@ -15,7 +15,7 @@ public class AbstractGame implements IGame, IGameRule {
 
     public AbstractGame(int maxBetsPerRound){
         this.maxBetsPerRound = maxBetsPerRound;
-        isBettingRoundStarted = false;
+        isBettingRoundStarted = true;
 
     }
 
