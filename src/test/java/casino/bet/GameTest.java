@@ -41,7 +41,7 @@ public class GameTest {
         //ACT
         game.startBettingRound();
         //ASSERT
-        assertTrue(game.isBettingRoundFinished());
+        assertFalse(game.isBettingRoundFinished());
     }
 
 }
