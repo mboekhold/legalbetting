@@ -3,6 +3,7 @@ package casino.game;
 import bettingauthorityAPI.BetToken;
 import bettingauthorityAPI.BettingAuthority;
 import casino.bet.Bet;
+import casino.bet.BetResult;
 import casino.gamingmachine.IGamingMachine;
 import casino.idbuilder.BettingRoundID;
 import casino.idbuilder.IDBuilder;
@@ -15,6 +16,11 @@ public class Game extends AbstractGame{
     Set<IBettingRound> bettingRounds;
     private BettingAuthority bettingAuthority;
     private boolean isBettingRoundStarted;
+
+    public BettingRound getCurrentBettingRound() {
+        return currentBettingRound;
+    }
+
     private BettingRound currentBettingRound;
     private IDBuilder builder;
 
@@ -52,6 +58,16 @@ public class Game extends AbstractGame{
     @Override
     public int getMaxBetsPerRound() {
         return super.getMaxBetsPerRound();
+    }
+
+    @Override
+    public void determineWinner() {
+        super.determineWinner();
+    }
+
+    @Override
+    public BetResult determineWinner(Integer randomWinValue, Set<Bet> bets) {
+        return super.determineWinner(randomWinValue, bets);
     }
 
     @Override

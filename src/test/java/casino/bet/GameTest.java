@@ -1,5 +1,6 @@
 package casino.bet;
 
+import bettingauthorityAPI.BetTokenAuthority;
 import casino.game.Game;
 import casino.game.IGame;
 import casino.game.NoCurrentRoundException;
@@ -8,6 +9,8 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.Mockito;
+
+import static org.mockito.Mockito.when;
 
 public class GameTest {
 
@@ -74,8 +77,9 @@ public class GameTest {
     }
 
     @Test
-    public void acceptValidBetsShouldNotExceedTheMaxBetNumberPerRound() throws NoCurrentRoundException {
+    public void acceptValidBetsWhenMaxBetsHasBeenReachedShouldReturnFalse() throws NoCurrentRoundException {
         //act
+        //Max bets is 3
         Bet bet1 = Mockito.mock(Bet.class);
         Bet bet2 = Mockito.mock(Bet.class);
         Bet bet3 = Mockito.mock(Bet.class);
@@ -91,6 +95,28 @@ public class GameTest {
         Assert.assertTrue(bet2Result);
         Assert.assertTrue(bet3Result);
         Assert.assertFalse(bet4Result);
+    }
+
+    @Test
+    public void determineWinnerShouldOnlyBeOneBetPerBettingRound() throws NoCurrentRoundException {
+        //arrange
+        Bet bet1 = Mockito.mock(Bet.class);
+        Bet bet2 = Mockito.mock(Bet.class);
+        Bet bet3 = Mockito.mock(Bet.class);
+        BetTokenAuthority betTokenAuthority = Mockito.mock(BetTokenAuthority.class);
+
+        //act
+        when(betTokenAuthority.getRandomInteger(game.getCurrentBettingRound().getBetToken())).thenReturn(1);
+        game.startBettingRound();
+        game.acceptBet(bet1, gamingMachine);
+        game.acceptBet(bet2, gamingMachine);
+        game.acceptBet(bet3, gamingMachine);
+        game.endBettingRound();
+        BetResult betResult = game.determineWinner(betTokenAuthority.getRandomInteger
+                (game.getCurrentBettingRound().getBetToken()), game.getCurrentBettingRound().getAllBetsMade());
+        //assert
+        int counter = 0;
+        Assert.assertTrue(betResult.getWinningBet() == bet1);
     }
 
 
