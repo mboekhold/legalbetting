@@ -37,7 +37,7 @@ public class Game extends AbstractGame{
 
     @Override
     public void endBettingRound() {
-
+        isBettingRoundStarted = false;
     }
 
     @Override
