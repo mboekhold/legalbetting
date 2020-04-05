@@ -10,13 +10,25 @@ import java.util.Set;
 
 public class Game extends AbstractGame{
 
-    Set<BettingRound> bettingRounds;
+    Set<IBettingRound> bettingRounds;
+    private BettingAuthority bettingAuthority;
+
+
     public Game(int maxBetsPerRound) {
         super(maxBetsPerRound);
         bettingRounds = new HashSet<>();
+        bettingAuthority = new BettingAuthority();
+        IDBuilder builder = new IDBuilder();
+        BettingRoundID bettingRoundID = builder.buildBettingRoundId();
+        BetToken betToken = bettingAuthority.getTokenAuthority().getBetToken(bettingRoundID);
+        bettingRounds.add(new BettingRound(bettingRoundID, betToken));
     }
 
-    public int getAmountBettingRounds() {
-        return 0;
+    public int getAmountOfBettingRounds(){
+        return bettingRounds.size();
     }
+
+
+
+
 }

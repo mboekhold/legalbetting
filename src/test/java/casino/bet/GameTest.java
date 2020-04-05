@@ -17,7 +17,7 @@ public class GameTest {
         int expectedBettingRounds = 1;
         //assert
 
-        Assert.assertEquals(expectedBettingRounds, game.getAmountBettingRounds());
+        Assert.assertEquals(expectedBettingRounds, game.getAmountOfBettingRounds());
     }
 
 }
