@@ -2,10 +2,8 @@ package casino.bet;
 
 import bettingauthorityAPI.BetToken;
 import bettingauthorityAPI.BetTokenAuthority;
-import casino.game.AbstractGame;
-import casino.game.Game;
-import casino.game.IBettingRound;
-import casino.game.IGame;
+import bettingauthorityAPI.BettingRoundID;
+import casino.game.*;
 import casino.gamingmachine.IGamingMachine;
 import org.junit.Test;
 import org.mockito.Mock;
@@ -47,28 +45,32 @@ public class GameTest {
     }
 
     @Test //Test which player has won a betting round
-    public void DetermineWinnerIsOnlyOnePlayer() {
+    public void DetermineWinnerIsOnlyOnePlayer() throws NoCurrentRoundException {
         //ARRANGE
         game = new Game(mockMaxBetsPerRound);
+        MoneyAmount moneyAmount = new MoneyAmount(mockMoneyAmount);
         BetID betID1 = new BetID();
         BetID betID2 = new BetID();
         BetID betID3 = new BetID();
-        MoneyAmount moneyAmount = new MoneyAmount(mockMoneyAmount);
-
-        Set<Bet> bets = new HashSet<Bet>();
         Bet betFromPlayer1 = new Bet(betID1, moneyAmount);
         Bet betFromPlayer2 = new Bet(betID2, moneyAmount);
         Bet betFromPlayer3 = new Bet(betID3, moneyAmount);
 
-        BetTokenAuthority betTokenAuthority = new BetTokenAuthority();//mock (BetTokenAuthority.class);
+        IGamingMachine iGamingMachine = mock(IGamingMachine.class);
         IBettingRound iBettingRound = mock(IBettingRound.class);
         BetToken betToken = new BetToken(iBettingRound.getBettingRoundID());
+        BetTokenAuthority betTokenAuthority = new BetTokenAuthority();
+
+        Integer randomIntegerFromBettingAuthorityMock = 1;
 
         //ACT
-        bets.add(betFromPlayer1);
-        bets.add(betFromPlayer2);
-        bets.add(betFromPlayer3);
-        BetResult betResult = game.determineWinner(betTokenAuthority.getRandomInteger(betToken), bets);
+        game.acceptBet(betFromPlayer1, iGamingMachine);
+        game.acceptBet(betFromPlayer2, iGamingMachine);
+        game.acceptBet(betFromPlayer3, iGamingMachine);
+
+        Set<Bet> currentBets = game.GetCurrentBettingRound().getAllBetsMade();
+
+        BetResult betResult = game.determineWinner(randomIntegerFromBettingAuthorityMock, currentBets);
         Bet winningBet = betResult.getWinningBet();
         //ASSERT
         int counter = 0;
