@@ -2,6 +2,8 @@ package casino.game;
 
 import bettingauthorityAPI.BetToken;
 import bettingauthorityAPI.BettingAuthority;
+import casino.bet.Bet;
+import casino.gamingmachine.IGamingMachine;
 import casino.idbuilder.BettingRoundID;
 import casino.idbuilder.IDBuilder;
 
@@ -15,8 +17,7 @@ public class Game extends AbstractGame{
     private boolean isBettingRoundStarted;
 
 
-    public Game(int maxBetsPerRound) {
-        super(maxBetsPerRound);
+    public Game() {
         bettingRounds = new HashSet<>();
         bettingAuthority = new BettingAuthority();
         IDBuilder builder = new IDBuilder();
@@ -43,5 +44,10 @@ public class Game extends AbstractGame{
     @Override
     public boolean isBettingRoundFinished() {
         return !isBettingRoundStarted;
+    }
+
+    @Override
+    public boolean acceptBet(Bet bet, IGamingMachine gamingMachine) throws NoCurrentRoundException {
+        return false;
     }
 }

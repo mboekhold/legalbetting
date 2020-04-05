@@ -2,12 +2,17 @@ package casino.bet;
 
 import casino.game.Game;
 import casino.game.IGame;
+import casino.game.NoCurrentRoundException;
+import casino.gamingmachine.IGamingMachine;
 import org.junit.Assert;
 import org.junit.Test;
+import org.mockito.Mock;
+import org.mockito.Mockito;
 
 public class GameTest {
 
-    private Game game = new Game(12);
+    private Game game = new Game();
+    private IGamingMachine gamingMachine = Mockito.mock(IGamingMachine.class);
 
     @Test
     public void gameConstructorShouldSetTheInitialRoundAndFields(){
@@ -44,6 +49,17 @@ public class GameTest {
         game.endBettingRound();
         //assert
         Assert.assertTrue(game.isBettingRoundFinished());
+    }
+
+    @Test
+    public void acceptValidBetAfterGameIsStartedShouldReturnTrue() throws NoCurrentRoundException {
+        //act
+        Bet bet = Mockito.mock(Bet.class);
+        //arrange
+        game.startBettingRound();
+        boolean result = game.acceptBet(bet, gamingMachine);
+        //assert
+        Assert.assertTrue(result);
     }
 
 

@@ -9,12 +9,10 @@ import java.util.Set;
 
 public class AbstractGame implements IGame, IGameRule {
 
-    private int maxBetsPerRound;
 
 
 
-    public AbstractGame(int maxBetsPerRound){
-        this.maxBetsPerRound = maxBetsPerRound;
+    public AbstractGame(){
 
     }
 
@@ -50,6 +48,6 @@ public class AbstractGame implements IGame, IGameRule {
 
     @Override
     public int getMaxBetsPerRound() {
-        return maxBetsPerRound;
+        return 3;
     }
 }
