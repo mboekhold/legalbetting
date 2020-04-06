@@ -1,6 +1,7 @@
 package casino.cashier;
 
 import casino.idbuilder.BetID;
+import casino.idbuilder.IDBuilder;
 import org.junit.Test;
 
 import java.util.HashSet;
@@ -47,6 +48,15 @@ public class CardTest {
         Set<BetID> betIDs = card.returnBetIDsAndClearCard();
         // Assert
         assertThat(card.betIDs.size(), is(0));
+    }
+
+    @Test
+    public void returnBetIdsShouldReturnNewSetOfBetIds(){
+        Card card = new Card(new IDBuilder().buildCardID());
+
+        Set<BetID> betIDS = card.returnBetIDs();
+
+        assertThat(betIDS, is(new HashSet<BetID>()));
     }
 
 }

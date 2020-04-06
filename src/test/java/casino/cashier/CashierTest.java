@@ -122,4 +122,5 @@ public class CashierTest {
         verify(betLoggingAuthority).handInGamblingCard(card.getCardID(), card.returnBetIDs());
     }
 
+
 }
