@@ -21,7 +21,7 @@ public class CasinoTest {
     private ICasino casino = new Casino();
 
     @Test
-    public void retrieveGameByNameShouldReturnValidGame(){
+    public void retrieveGameByNameShouldReturnValidGame() throws GameNotFoundException {
         //arrange
         //act
         String gameName = "candy crush";
@@ -32,7 +32,7 @@ public class CasinoTest {
     }
 
     @Test(expected = GameNotFoundException.class)
-    public void retrieveGameByInvalidNameShouldThrowException(){
+    public void retrieveGameByInvalidNameShouldThrowException() throws GameNotFoundException {
         //arrange
         String gameName = "Solitaire";
         IGame game = Mockito.mock(Game.class);
@@ -64,7 +64,7 @@ public class CasinoTest {
     }
 
     @Test //Our Assumption is that a card is valid if the CardID has been set
-    public void checkIfTheCasinoCanRunMoreThanOneGames(){
+    public void checkIfTheCasinoCanRunMoreThanOneGames() throws GameNotFoundException {
         //arrange
         IGame game1 = Mockito.mock(IGame.class);
         IGame game2 = Mockito.mock(IGame.class);

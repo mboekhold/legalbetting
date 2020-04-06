@@ -20,8 +20,14 @@ public class Casino implements ICasino {
     }
 
     @Override
-    public IGame getGame(String name) {
-        return games.get(name);
+    public IGame getGame(String name) throws GameNotFoundException {
+        IGame toReturn = games.get(name);
+        if (toReturn != null) {
+            return toReturn;
+        } else {
+            throw new GameNotFoundException();
+        }
+        //return games.get(name);
     }
 
     @Override
