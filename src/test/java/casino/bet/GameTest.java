@@ -157,6 +157,7 @@ public class GameTest {
         game.setBetLoggingAuthority(iBetLoggingAuthority);
         game.startBettingRound();
         IBettingRound iBettingRound = game.getCurrentBettingRound();
+        game.acceptBet(bet1, gamingMachine);
         game.endBettingRound();
         //assert
         verify(iBetLoggingAuthority).addAcceptedBet(bet1,

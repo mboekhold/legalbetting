@@ -99,6 +99,7 @@ public class Game extends AbstractGame{
     @Override
     public boolean acceptBet(Bet bet, IGamingMachine gamingMachine) throws NoCurrentRoundException {
        if (isBettingRoundStarted && getMaxBetsPerRound() > currentBettingRound.numberOFBetsMade()){
+           betLoggingAuthority.addAcceptedBet(bet, currentBettingRound.getBettingRoundID(), gamingMachine.getGamingMachineID());
            currentBettingRound.placeBet(bet);
            return true;
        }
