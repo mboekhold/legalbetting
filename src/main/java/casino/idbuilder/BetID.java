@@ -21,5 +21,4 @@ public class BetID {
         public int hashCode() {
             return Objects.hash(id);
         }
-    }
 }

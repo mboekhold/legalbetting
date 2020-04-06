@@ -2,13 +2,13 @@ package casino.gamingmachine;
 
 
 import casino.bet.Bet;
-import casino.bet.BetID;
 import casino.bet.BetResult;
 import casino.bet.MoneyAmount;
 import casino.cashier.BetNotExceptedException;
 import casino.cashier.ICashier;
 import casino.cashier.IPlayerCard;
 import casino.game.IGame;
+import casino.idbuilder.BetID;
 import casino.idbuilder.GamingMachineID;
 
 import java.util.UUID;
