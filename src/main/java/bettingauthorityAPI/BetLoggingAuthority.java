@@ -1,6 +1,7 @@
 package bettingauthorityAPI;
 
 import casino.bet.Bet;
+import casino.idbuilder.BetID;
 import casino.bet.BetResult;
 import casino.game.IBettingRound;
 import casino.idbuilder.BetID;
@@ -43,8 +44,6 @@ public class BetLoggingAuthority implements IBetLoggingAuthority {
         // NOT RELEVANT TO KNOW THIS
 
     }
-
-
 
     /**
      * this method logs when a BettingRound starts. It should be called before any submitted bets are added to
