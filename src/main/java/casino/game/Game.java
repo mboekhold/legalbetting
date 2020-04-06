@@ -80,15 +80,17 @@ public class Game extends AbstractGame{
 
     @Override
     public BetResult determineWinner(Integer randomWinValue, Set<Bet> bets) {
-        int counter = 0;
-        for(Bet b : bets){
-            if (randomWinValue == counter) {
-                this.betResult = new BetResult(b, b.getMoneyAmount());
-                iGamingMachine.acceptWinner(betResult);
-                return betResult;
+
+            int counter = 0;
+            for (Bet b : bets) {
+                if (randomWinValue == counter) {
+                    this.betResult = new BetResult(b, b.getMoneyAmount());
+                    iGamingMachine.acceptWinner(betResult);
+                    return betResult;
+                }
+                counter++;
             }
-            counter++;
-        }
+
         return null;
     }
 

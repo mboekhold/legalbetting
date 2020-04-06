@@ -192,6 +192,26 @@ public class GameTest {
         verify(gamingMachine).acceptWinner(betResult);
     }
 
+    @Test
+    public void determineWinnerBeforeBettingRoundIsFinishedShouldReturnFalse() throws NoCurrentRoundException {
+        //arrange
+        Bet bet1 = new Bet(new BetID(new UUID(123, 123)), new MoneyAmount(5000));
+        Bet bet2 = new Bet(new BetID(new UUID(456, 456)), new MoneyAmount(5000));
+        Bet bet3 = new Bet(new BetID(new UUID(789, 789)), new MoneyAmount(5000));
+        BetTokenAuthority betTokenAuthority = Mockito.mock(BetTokenAuthority.class);
+        //act
+        game.startBettingRound();
+        when(betTokenAuthority.getRandomInteger(game.getCurrentBettingRound().getBetToken())).thenReturn(1);
+        game.acceptBet(bet1, gamingMachine);
+        game.acceptBet(bet2, gamingMachine);
+        game.acceptBet(bet3, gamingMachine);
+        //game.endBettingRound();
+        BetResult betResult = game.determineWinner(betTokenAuthority.getRandomInteger
+                (game.getCurrentBettingRound().getBetToken()), game.getCurrentBettingRound().getAllBetsMade());
+        //assert
+        Assert.assertNull(betResult);
+    }
+
 
 
 }
