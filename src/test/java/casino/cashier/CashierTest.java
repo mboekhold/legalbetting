@@ -16,7 +16,8 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.mockito.Mockito.*;
 
 public class CashierTest {
-    private Cashier cashier = new Cashier();
+    private IBetLoggingAuthority betLoggingAuthority = mock(IBetLoggingAuthority.class);
+    private Cashier cashier = new Cashier(betLoggingAuthority);
 
     @Test
     public void addAmount_ValidCardAndAmount_MapSizeIsOne() {

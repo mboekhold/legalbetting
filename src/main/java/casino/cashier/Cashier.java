@@ -22,8 +22,6 @@ public class Cashier implements ICashier {
         this.betLoggingAuthority = betLoggingAuthority;
     }
 
-    public Cashier() {
-    }
 
     @Override
     public IPlayerCard distributeGamblerCard() {
