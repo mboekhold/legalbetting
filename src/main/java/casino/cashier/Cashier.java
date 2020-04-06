@@ -29,6 +29,7 @@ public class Cashier implements ICashier {
     public IPlayerCard distributeGamblerCard() {
         Card card = new Card(new IDBuilder().buildCardID());
         betLoggingAuthority.handOutGamblingCard(card.getCardID());
+        moneyAmounts.put(card, new MoneyAmount(0));
         return card;
     }
 

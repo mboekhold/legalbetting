@@ -122,5 +122,13 @@ public class CashierTest {
         verify(betLoggingAuthority).handInGamblingCard(card.getCardID(), card.returnBetIDs());
     }
 
+    @Test
+    public void distributeGamblerCardShouldAddNewCardAndZeroMoneyAmount(){
+        IBetLoggingAuthority betLoggingAuthority = Mockito.mock(IBetLoggingAuthority.class);
+        Cashier cashier = new Cashier(betLoggingAuthority);
+        IPlayerCard card = cashier.distributeGamblerCard();
+
+        assertThat(cashier.getAmountOfMoneyOnCard(card), is(0L));
+    }
 
 }
