@@ -1,6 +1,7 @@
 package casino.cashier;
 
 import casino.idbuilder.BetID;
+import casino.idbuilder.IDBuilder;
 import org.junit.Test;
 
 import java.util.HashSet;
@@ -13,13 +14,13 @@ import static org.junit.Assert.*;
 public class CardTest {
     Card card = new Card();
     @Test
-    public void addBetID_ValidBetID_NumberOfBetIDsIsOne() {
+    public void generateBetID_ValidBetID_NumberOfBetIDsIsOne() {
         // Arrange
         BetID betID = mock(BetID.class);
         int AMOUNTOFBETS = 1;
 
         // Act
-        card.addBetID(betID);
+        card.generateNewBetID();
 
         // Assert
         assertThat(AMOUNTOFBETS, is(card.getNumberOfBetIDs()));
@@ -29,7 +30,7 @@ public class CardTest {
     public void returnBetIDsAndClearCard_AddedOneBetToCard_BetIdSetIsSizeOne() {
         // Arrange
         BetID betID = mock(BetID.class);
-        card.addBetID(betID);
+        card.generateNewBetID();
 
         // Act
         Set<BetID> betIDs = card.returnBetIDsAndClearCard();
@@ -41,12 +42,21 @@ public class CardTest {
     public void returnBetIDsAndClearCard_AddedOneBetToCard_BetIDsSizeResetToZero() {
         // Arrange
         BetID betID = mock(BetID.class);
-        card.addBetID(betID);
+        card.generateNewBetID();
 
         // Act
         Set<BetID> betIDs = card.returnBetIDsAndClearCard();
         // Assert
         assertThat(card.betIDs.size(), is(0));
+    }
+
+    @Test
+    public void returnBetIdsShouldReturnNewSetOfBetIds(){
+        Card card = new Card(new IDBuilder().buildCardID());
+
+        Set<BetID> betIDS = card.returnBetIDs();
+
+        assertThat(betIDS, is(new HashSet<BetID>()));
     }
 
 }

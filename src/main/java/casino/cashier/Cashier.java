@@ -5,6 +5,7 @@ import casino.bet.Bet;
 import casino.idbuilder.BetID;
 import casino.idbuilder.CardID;
 import casino.bet.MoneyAmount;
+import casino.idbuilder.IDBuilder;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -15,19 +16,27 @@ public class Cashier implements ICashier {
 
     Map<IPlayerCard, MoneyAmount> moneyAmounts = new HashMap<>();
     Set<BetID> Logs = new HashSet<>();
+    private IBetLoggingAuthority betLoggingAuthority;
+
+    public Cashier(IBetLoggingAuthority betLoggingAuthority) {
+        this.betLoggingAuthority = betLoggingAuthority;
+    }
+
 
     @Override
     public IPlayerCard distributeGamblerCard() {
-        Card card = new Card();
+        Card card = new Card(new IDBuilder().buildCardID());
+        betLoggingAuthority.handOutGamblingCard(card.getCardID());
+        moneyAmounts.put(card, new MoneyAmount(0));
         return card;
     }
 
     @Override
     public void returnGamblerCard(IPlayerCard card) {
+        betLoggingAuthority.handInGamblingCard(card.getCardID(), card.returnBetIDs());
         Set<BetID> BetIDs = card.returnBetIDsAndClearCard();
         Logs.addAll(BetIDs);
         moneyAmounts.remove(card);
-
     }
 
     @Override

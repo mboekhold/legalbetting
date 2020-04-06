@@ -5,6 +5,7 @@ import casino.bet.Bet;
 import casino.idbuilder.BetID;
 import casino.bet.MoneyAmount;
 import org.junit.Test;
+import org.mockito.Mockito;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -15,8 +16,8 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.mockito.Mockito.*;
 
 public class CashierTest {
-    private Cashier cashier = new Cashier();
-
+    private IBetLoggingAuthority betLoggingAuthority = mock(IBetLoggingAuthority.class);
+    private Cashier cashier = new Cashier(betLoggingAuthority);
 
     @Test
     public void addAmount_ValidCardAndAmount_MapSizeIsOne() {
@@ -56,6 +57,8 @@ public class CashierTest {
     @Test
     public void distributeGamblerCard_ReturnValidPlayerCard() {
         // Act
+        IBetLoggingAuthority iBetLoggingAuthority = mock(IBetLoggingAuthority.class);
+        Cashier cashier = new Cashier(iBetLoggingAuthority);
         IPlayerCard card = cashier.distributeGamblerCard();
         // Assert
         assertThat(card, is(IPlayerCard.class));
@@ -94,6 +97,39 @@ public class CashierTest {
 
         // Assert
         assertThat(cashier.getAmountOfMoneyOnCard(card), is((long) 0));
+    }
+
+    @Test
+    public void distributeGamblerCardShouldCallBetLogAuthorityHandOutCard(){
+        //act
+        IBetLoggingAuthority betLoggingAuthority = Mockito.mock(IBetLoggingAuthority.class);
+        Cashier cashier = new Cashier(betLoggingAuthority);
+        IPlayerCard card = cashier.distributeGamblerCard();
+
+        //assert
+        verify(betLoggingAuthority).handOutGamblingCard(card.getCardID());
+    }
+
+    @Test
+    public void handInGamblerCardShouldCallBetLogAuthorityHandInCard() {
+        // Arrange
+        IBetLoggingAuthority betLoggingAuthority = Mockito.mock(IBetLoggingAuthority.class);
+        Cashier cashier = new Cashier(betLoggingAuthority);
+        IPlayerCard card = cashier.distributeGamblerCard();
+        //Act
+        cashier.returnGamblerCard(card);
+
+        // Assert
+        verify(betLoggingAuthority).handInGamblingCard(card.getCardID(), card.returnBetIDs());
+    }
+
+    @Test
+    public void distributeGamblerCardShouldAddNewCardAndZeroMoneyAmount(){
+        IBetLoggingAuthority betLoggingAuthority = Mockito.mock(IBetLoggingAuthority.class);
+        Cashier cashier = new Cashier(betLoggingAuthority);
+        IPlayerCard card = cashier.distributeGamblerCard();
+
+        assertThat(cashier.getAmountOfMoneyOnCard(card), is(0L));
     }
 
 }
