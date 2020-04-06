@@ -1,7 +1,9 @@
 package casino.game;
 
+import bettingauthorityAPI.BetLoggingAuthority;
 import bettingauthorityAPI.BetToken;
 import bettingauthorityAPI.BettingAuthority;
+import bettingauthorityAPI.IBetLoggingAuthority;
 import casino.bet.Bet;
 import casino.bet.BetResult;
 import casino.gamingmachine.IGamingMachine;
@@ -15,19 +17,29 @@ public class Game extends AbstractGame{
 
     Set<IBettingRound> bettingRounds;
     private BettingAuthority bettingAuthority;
-    private boolean isBettingRoundStarted;
 
-    public BettingRound getCurrentBettingRound() {
-        return currentBettingRound;
+    public IBetLoggingAuthority getBetLoggingAuthority() {
+        return betLoggingAuthority;
     }
 
-    private BettingRound currentBettingRound;
+    public void setBetLoggingAuthority(IBetLoggingAuthority betLoggingAuthority) {
+        this.betLoggingAuthority = betLoggingAuthority;
+    }
+
+    private IBetLoggingAuthority betLoggingAuthority;
+    private boolean isBettingRoundStarted;
+
+    private IBettingRound currentBettingRound;
     private IDBuilder builder;
 
+    public IBettingRound getCurrentBettingRound() {
+        return currentBettingRound;
+    }
 
     public Game() {
         bettingRounds = new HashSet<>();
         bettingAuthority = new BettingAuthority();
+        betLoggingAuthority = new BetLoggingAuthority();
         isBettingRoundStarted = false;
         builder = new IDBuilder();
     }
@@ -43,6 +55,8 @@ public class Game extends AbstractGame{
         BetToken betToken = bettingAuthority.getTokenAuthority().getBetToken(bettingRoundID);
         currentBettingRound = new BettingRound(bettingRoundID, betToken);
         bettingRounds.add(currentBettingRound);
+
+        betLoggingAuthority.startBettingRound(this.currentBettingRound);
     }
 
     @Override
