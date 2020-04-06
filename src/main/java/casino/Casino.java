@@ -8,8 +8,6 @@ import java.util.HashMap;
 
 
 public class Casino implements ICasino {
-
-
     private HashMap<String, IGame> games;
 
     public Casino() {
