@@ -125,7 +125,6 @@ public class GameTest {
     public void checkIfBetLoggingAuthorityHasLoggedTheStartOfABettingRound() {
         //arrange
         IBetLoggingAuthority iBetLoggingAuthority = Mockito.mock(IBetLoggingAuthority.class);
-
         //act
         game.setBetLoggingAuthority(iBetLoggingAuthority);
         game.startBettingRound();
@@ -134,7 +133,18 @@ public class GameTest {
         verify(iBetLoggingAuthority).startBettingRound(iBettingRound);
     }
 
-
+    @Test
+    public void checkIfBetLoggingAuthorityHasLoggedTheEndOfABettingRound() {
+        //arrange
+        IBetLoggingAuthority iBetLoggingAuthority = Mockito.mock(IBetLoggingAuthority.class);
+        BetResult betResult = Mockito.mock(BetResult.class);
+        //act
+        game.startBettingRound();
+        IBettingRound iBettingRound = game.getCurrentBettingRound();
+        game.endBettingRound();
+        //assert
+        verify(iBetLoggingAuthority).endBettingRound(iBettingRound, betResult);
+    }
 
 
 }
