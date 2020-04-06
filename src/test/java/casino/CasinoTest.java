@@ -32,7 +32,7 @@ public class CasinoTest {
     }
 
     @Test(expected = GameNotFoundException.class)
-    public void retrieveGameByInvalidNameShouldThrowException() throws GameNotFoundException {
+    public void retrieveGameByInvalidNameShouldThrowGameNotFoundException() throws GameNotFoundException {
         //arrange
         String gameName = "Solitaire";
         IGame game = Mockito.mock(Game.class);

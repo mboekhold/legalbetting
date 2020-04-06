@@ -27,7 +27,6 @@ public class Casino implements ICasino {
         } else {
             throw new GameNotFoundException();
         }
-        //return games.get(name);
     }
 
     @Override
