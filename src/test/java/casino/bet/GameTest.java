@@ -1,7 +1,9 @@
 package casino.bet;
 
 import bettingauthorityAPI.BetTokenAuthority;
+import bettingauthorityAPI.IBetLoggingAuthority;
 import casino.game.Game;
+import casino.game.IBettingRound;
 import casino.game.IGame;
 import casino.game.NoCurrentRoundException;
 import casino.gamingmachine.IGamingMachine;
@@ -14,6 +16,7 @@ import org.mockito.Mockito;
 import java.util.UUID;
 
 import static org.hamcrest.CoreMatchers.is;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 public class GameTest {
@@ -116,6 +119,18 @@ public class GameTest {
                 (game.getCurrentBettingRound().getBetToken()), game.getCurrentBettingRound().getAllBetsMade());
         //assert
         Assert.assertThat(betResult.getWinningBet(), is(bet2));
+    }
+
+    @Test
+    public void checkIfBetLoggingAuthorityHasLoggedTheStartOfABettingRound() {
+        //arrange
+        IBetLoggingAuthority iBetLoggingAuthority = Mockito.mock(IBetLoggingAuthority.class);
+        IBettingRound iBettingRound = game.getCurrentBettingRound();
+        //act
+        game.startBettingRound();
+        //iBetLoggingAuthority.startBettingRound(iBettingRound);
+        //assert
+        verify(iBetLoggingAuthority).startBettingRound(iBettingRound);
     }
 
 
