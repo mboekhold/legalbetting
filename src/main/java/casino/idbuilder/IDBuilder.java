@@ -11,7 +11,7 @@ package casino.idbuilder;
 public class IDBuilder {
 
     public BettingRoundID buildBettingRoundId(){
-        return null;
+        return new BettingRoundID();
     }
 
     public CardID buildCardID(){

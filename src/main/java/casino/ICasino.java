@@ -21,7 +21,7 @@ public interface ICasino {
      *
      * @return
      */
-    IGame getGame(String name);
+    IGame getGame(String name) throws GameNotFoundException;
 
     /**
      * check if bet is valid.
