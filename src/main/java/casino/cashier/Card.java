@@ -1,6 +1,7 @@
 package casino.cashier;
 
-import casino.bet.BetID;
+import casino.idbuilder.BetID;
+import casino.idbuilder.CardID;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -15,14 +16,13 @@ public class Card implements IPlayerCard {
 
     @Override
     public Set<BetID> returnBetIDs() {
-        return null;
+        return new HashSet<>(betIDs);
     }
 
     @Override
     public Set<BetID> returnBetIDsAndClearCard() {
         Set<BetID> copy = new HashSet<>(betIDs);
         betIDs.clear();
-
         return copy;
     }
 
@@ -37,9 +37,7 @@ public class Card implements IPlayerCard {
     }
 
     @Override
-    public CardID getCardID() {
-        return null;
-    }
+    public CardID getCardID(){ return null; }
 
     public void addBetID(BetID betID) {
         betIDs.add(betID);

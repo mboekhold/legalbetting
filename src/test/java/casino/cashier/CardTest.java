@@ -1,6 +1,6 @@
 package casino.cashier;
 
-import casino.bet.BetID;
+import casino.idbuilder.BetID;
 import org.junit.Test;
 
 import java.util.HashSet;
@@ -11,11 +11,10 @@ import static org.mockito.Mockito.*;
 import static org.junit.Assert.*;
 
 public class CardTest {
-
+    Card card = new Card();
     @Test
     public void addBetID_ValidBetID_NumberOfBetIDsIsOne() {
         // Arrange
-        Card card = new Card();
         BetID betID = mock(BetID.class);
         int AMOUNTOFBETS = 1;
 
@@ -29,7 +28,6 @@ public class CardTest {
     @Test
     public void returnBetIDsAndClearCard_AddedOneBetToCard_BetIdSetIsSizeOne() {
         // Arrange
-        Card card = new Card();
         BetID betID = mock(BetID.class);
         card.addBetID(betID);
 
@@ -42,7 +40,6 @@ public class CardTest {
     @Test
     public void returnBetIDsAndClearCard_AddedOneBetToCard_BetIDsSizeResetToZero() {
         // Arrange
-        Card card = new Card();
         BetID betID = mock(BetID.class);
         card.addBetID(betID);
 

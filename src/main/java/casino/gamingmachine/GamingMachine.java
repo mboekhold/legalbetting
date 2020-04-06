@@ -58,4 +58,5 @@ public class GamingMachine implements IGamingMachine {
         return card;
     }
 
+
 }

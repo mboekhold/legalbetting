@@ -1,7 +1,9 @@
 package casino.cashier;
 
+import bettingauthorityAPI.IBetLoggingAuthority;
 import casino.bet.Bet;
-import casino.bet.BetID;
+import casino.idbuilder.BetID;
+import casino.idbuilder.CardID;
 import casino.bet.MoneyAmount;
 
 import java.util.HashMap;
@@ -12,12 +14,12 @@ import java.util.Set;
 public class Cashier implements ICashier {
 
     Map<IPlayerCard, MoneyAmount> moneyAmounts = new HashMap<>();
-
     Set<BetID> Logs = new HashSet<>();
 
     @Override
     public IPlayerCard distributeGamblerCard() {
-        return new Card();
+        Card card = new Card();
+        return card;
     }
 
     @Override
@@ -25,6 +27,7 @@ public class Cashier implements ICashier {
         Set<BetID> BetIDs = card.returnBetIDsAndClearCard();
         Logs.addAll(BetIDs);
         moneyAmounts.remove(card);
+
     }
 
     @Override
