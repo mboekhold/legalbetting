@@ -80,7 +80,7 @@ public class Game extends AbstractGame{
 
     @Override
     public BetResult determineWinner(Integer randomWinValue, Set<Bet> bets) {
-
+        if (!this.isBettingRoundStarted) {
             int counter = 0;
             for (Bet b : bets) {
                 if (randomWinValue == counter) {
@@ -90,7 +90,7 @@ public class Game extends AbstractGame{
                 }
                 counter++;
             }
-
+        }
         return null;
     }
 

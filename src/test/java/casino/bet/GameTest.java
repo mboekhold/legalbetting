@@ -193,7 +193,7 @@ public class GameTest {
     }
 
     @Test
-    public void determineWinnerBeforeBettingRoundIsFinishedShouldReturnFalse() throws NoCurrentRoundException {
+    public void determineWinnerBeforeBettingRoundIsFinishedShouldReturnNull() throws NoCurrentRoundException {
         //arrange
         Bet bet1 = new Bet(new BetID(new UUID(123, 123)), new MoneyAmount(5000));
         Bet bet2 = new Bet(new BetID(new UUID(456, 456)), new MoneyAmount(5000));
