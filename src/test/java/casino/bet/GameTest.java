@@ -21,8 +21,8 @@ import static org.mockito.Mockito.*;
 
 public class GameTest {
 
-    private Game game = new Game();
     private IGamingMachine gamingMachine = Mockito.mock(IGamingMachine.class);
+    private Game game = new Game(gamingMachine);
 
     @Test
     public void gameConstructorShouldSetTheInitialRoundAndFields(){
@@ -151,18 +151,38 @@ public class GameTest {
             throws NoCurrentRoundException {
         //arrange
         IBetLoggingAuthority iBetLoggingAuthority = Mockito.mock(IBetLoggingAuthority.class);
-        BetResult betResult = Mockito.mock(BetResult.class);
         Bet bet1 = new Bet(new BetID(new UUID(123, 123)), new MoneyAmount(5000));
         //act
         game.setBetLoggingAuthority(iBetLoggingAuthority);
         game.startBettingRound();
-        IBettingRound iBettingRound = game.getCurrentBettingRound();
         game.acceptBet(bet1, gamingMachine);
         game.endBettingRound();
         //assert
         verify(iBetLoggingAuthority).addAcceptedBet(bet1,
                 game.getCurrentBettingRound().getBettingRoundID(), gamingMachine.getGamingMachineID());
     }
+
+    @Test
+    public void checkIfGameNotifiesGamingMachineAboutTheWinner() throws NoCurrentRoundException {
+        //arrange
+        Bet bet1 = new Bet(new BetID(new UUID(123, 123)), new MoneyAmount(5000));
+        Bet bet2 = new Bet(new BetID(new UUID(456, 456)), new MoneyAmount(5000));
+        Bet bet3 = new Bet(new BetID(new UUID(789, 789)), new MoneyAmount(5000));
+        BetTokenAuthority betTokenAuthority = Mockito.mock(BetTokenAuthority.class);
+        //act
+        game.startBettingRound();
+        when(betTokenAuthority.getRandomInteger(game.getCurrentBettingRound().getBetToken())).thenReturn(1);
+        game.acceptBet(bet1, gamingMachine);
+        game.acceptBet(bet2, gamingMachine);
+        game.acceptBet(bet3, gamingMachine);
+        game.endBettingRound();
+        BetResult betResult = game.determineWinner(betTokenAuthority.getRandomInteger
+                (game.getCurrentBettingRound().getBetToken()), game.getCurrentBettingRound().getAllBetsMade());
+        //assert
+        verify(gamingMachine).acceptWinner(betResult);
+    }
+
+
 
 
 }

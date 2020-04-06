@@ -23,6 +23,12 @@ public class Game extends AbstractGame{
     private IDBuilder builder;
     private BetResult betResult;
 
+    public IGamingMachine getiGamingMachine() {
+        return iGamingMachine;
+    }
+
+    private IGamingMachine iGamingMachine;
+
     public BetResult getBetResult() {
         return betResult;
     }
@@ -39,12 +45,13 @@ public class Game extends AbstractGame{
         return currentBettingRound;
     }
 
-    public Game() {
+    public Game(IGamingMachine igm) {
         bettingRounds = new HashSet<>();
         bettingAuthority = new BettingAuthority();
         betLoggingAuthority = new BetLoggingAuthority();
         isBettingRoundStarted = false;
         builder = new IDBuilder();
+        this.iGamingMachine = igm;
     }
 
     public int getAmountOfBettingRounds(){
