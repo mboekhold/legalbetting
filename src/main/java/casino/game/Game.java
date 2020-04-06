@@ -17,6 +17,15 @@ public class Game extends AbstractGame{
 
     Set<IBettingRound> bettingRounds;
     private BettingAuthority bettingAuthority;
+    private IBetLoggingAuthority betLoggingAuthority;
+    private boolean isBettingRoundStarted;
+    private IBettingRound currentBettingRound;
+    private IDBuilder builder;
+    private BetResult betResult;
+
+    public BetResult getBetResult() {
+        return betResult;
+    }
 
     public IBetLoggingAuthority getBetLoggingAuthority() {
         return betLoggingAuthority;
@@ -25,12 +34,6 @@ public class Game extends AbstractGame{
     public void setBetLoggingAuthority(IBetLoggingAuthority betLoggingAuthority) {
         this.betLoggingAuthority = betLoggingAuthority;
     }
-
-    private IBetLoggingAuthority betLoggingAuthority;
-    private boolean isBettingRoundStarted;
-
-    private IBettingRound currentBettingRound;
-    private IDBuilder builder;
 
     public IBettingRound getCurrentBettingRound() {
         return currentBettingRound;
@@ -62,6 +65,7 @@ public class Game extends AbstractGame{
     @Override
     public void endBettingRound() {
         isBettingRoundStarted = false;
+        betLoggingAuthority.endBettingRound(currentBettingRound, betResult);
     }
 
     @Override
@@ -84,7 +88,8 @@ public class Game extends AbstractGame{
         int counter = 0;
         for(Bet b : bets){
             if (randomWinValue == counter) {
-                return new BetResult(b, b.getMoneyAmount());
+                this.betResult = new BetResult(b, b.getMoneyAmount());
+                return betResult;
             }
             counter++;
         }

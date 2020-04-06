@@ -139,11 +139,12 @@ public class GameTest {
         IBetLoggingAuthority iBetLoggingAuthority = Mockito.mock(IBetLoggingAuthority.class);
         BetResult betResult = Mockito.mock(BetResult.class);
         //act
+        game.setBetLoggingAuthority(iBetLoggingAuthority);
         game.startBettingRound();
         IBettingRound iBettingRound = game.getCurrentBettingRound();
         game.endBettingRound();
         //assert
-        verify(iBetLoggingAuthority).endBettingRound(iBettingRound, betResult);
+        verify(iBetLoggingAuthority).endBettingRound(iBettingRound, game.getBetResult());
     }
 
 
