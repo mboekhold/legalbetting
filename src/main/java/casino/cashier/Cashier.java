@@ -34,10 +34,10 @@ public class Cashier implements ICashier {
 
     @Override
     public void returnGamblerCard(IPlayerCard card) {
+        betLoggingAuthority.handInGamblingCard(card.getCardID(), card.returnBetIDs());
         Set<BetID> BetIDs = card.returnBetIDsAndClearCard();
         Logs.addAll(BetIDs);
         moneyAmounts.remove(card);
-
     }
 
     @Override

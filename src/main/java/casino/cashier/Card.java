@@ -12,10 +12,12 @@ public class Card implements IPlayerCard {
     private CardID cardID;
 
     public Card() {
+
         this.betIDs = new HashSet<>();
     }
 
     public Card(CardID cardID) {
+        this.betIDs = new HashSet<>();
         this.cardID = cardID;
     }
 
@@ -42,7 +44,7 @@ public class Card implements IPlayerCard {
     }
 
     @Override
-    public CardID getCardID(){ return null; }
+    public CardID getCardID(){ return cardID; }
 
     public void addBetID(BetID betID) {
         betIDs.add(betID);
