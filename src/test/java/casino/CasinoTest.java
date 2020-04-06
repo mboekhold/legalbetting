@@ -31,6 +31,17 @@ public class CasinoTest {
         assertEquals(validGame, game);
     }
 
+    @Test(expected = GameNotFoundException.class)
+    public void retrieveGameByInvalidNameShouldThrowException(){
+        //arrange
+        String gameName = "Solitaire";
+        IGame game = Mockito.mock(Game.class);
+        //act
+        casino.addGame(gameName, game);
+        IGame gameNotFound = casino.getGame("Unknown");
+        //assert
+    }
+
 
     @Test //Our Assumption is that a card is invalid if the CardID has not been set
     public void invalidCardCheckBetShouldReturnFalse(){
@@ -53,7 +64,7 @@ public class CasinoTest {
     }
 
     @Test //Our Assumption is that a card is valid if the CardID has been set
-    public void CheckIfTheCasinoCanRunMoreThanOneGames(){
+    public void checkIfTheCasinoCanRunMoreThanOneGames(){
         //arrange
         IGame game1 = Mockito.mock(IGame.class);
         IGame game2 = Mockito.mock(IGame.class);
