@@ -4,20 +4,18 @@ import bettingauthorityAPI.BetTokenAuthority;
 import bettingauthorityAPI.IBetLoggingAuthority;
 import casino.game.Game;
 import casino.game.IBettingRound;
-import casino.game.IGame;
 import casino.game.NoCurrentRoundException;
 import casino.gamingmachine.IGamingMachine;
 import casino.idbuilder.BetID;
 import org.junit.Assert;
 import org.junit.Test;
-import org.mockito.InOrder;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 
 import java.util.UUID;
 
 import static org.hamcrest.CoreMatchers.is;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 public class GameTest {
 
@@ -29,14 +27,14 @@ public class GameTest {
         //act
 
         //arrange
+
         //assert
         Assert.assertTrue(game.getMaxBetsPerRound() > 0);
         Assert.assertTrue(game.isBettingRoundFinished());
     }
 
-    @Test
+    @Test //We assume games will automatically start with on the first round
     public void startRoundShouldSetIsBettingRoundFinishedToFalse(){
-        //We assume games will automatically start with on the first round
         //act
 
         //arrange
@@ -190,7 +188,6 @@ public class GameTest {
         //assert
         verify(gamingMachine).acceptWinner(betResult);
     }
-
 
 
 
