@@ -9,9 +9,14 @@ import java.util.Set;
 public class Card implements IPlayerCard {
 
     Set<BetID> betIDs;
+    private CardID cardID;
 
     public Card() {
         this.betIDs = new HashSet<>();
+    }
+
+    public Card(CardID cardID) {
+        this.cardID = cardID;
     }
 
     @Override
