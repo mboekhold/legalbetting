@@ -14,6 +14,7 @@ import org.mockito.Mockito;
 import java.util.UUID;
 
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.not;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -126,6 +127,8 @@ public class GameTest {
                 (game.getCurrentBettingRound().getBetToken()), game.getCurrentBettingRound().getAllBetsMade());
         //assert
         Assert.assertThat(betResult.getWinningBet(), is(bet2));
+        Assert.assertThat(betResult.getWinningBet(), not(bet1));
+        Assert.assertThat(betResult.getWinningBet(), not(bet3));
     }
 
     @Test
