@@ -5,11 +5,15 @@ import casino.game.Game;
 import casino.game.IGame;
 import casino.game.NoCurrentRoundException;
 import casino.gamingmachine.IGamingMachine;
+import casino.idbuilder.BetID;
 import org.junit.Assert;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 
+import java.util.UUID;
+
+import static org.hamcrest.CoreMatchers.is;
 import static org.mockito.Mockito.when;
 
 public class GameTest {
@@ -22,12 +26,8 @@ public class GameTest {
         //act
 
         //arrange
-        int expectedBettingRounds = 1;
-        int expectedMaxBets = 12;
         //assert
-
-        Assert.assertEquals(expectedBettingRounds, game.getAmountOfBettingRounds());
-        Assert.assertEquals(expectedMaxBets, game.getMaxBetsPerRound());
+        Assert.assertTrue(game.getMaxBetsPerRound() > 0);
         Assert.assertTrue(game.isBettingRoundFinished());
     }
 
@@ -100,14 +100,14 @@ public class GameTest {
     @Test
     public void determineWinnerShouldOnlyBeOneBetPerBettingRound() throws NoCurrentRoundException {
         //arrange
-        Bet bet1 = Mockito.mock(Bet.class);
-        Bet bet2 = Mockito.mock(Bet.class);
-        Bet bet3 = Mockito.mock(Bet.class);
+        Bet bet1 = new Bet(new BetID(new UUID(123, 123)), new MoneyAmount(5000));
+        Bet bet2 = new Bet(new BetID(new UUID(456, 456)), new MoneyAmount(5000));
+        Bet bet3 = new Bet(new BetID(new UUID(789, 789)), new MoneyAmount(5000));
         BetTokenAuthority betTokenAuthority = Mockito.mock(BetTokenAuthority.class);
 
         //act
         game.startBettingRound();
-        when(betTokenAuthority.getRandomInteger(game.getCurrentBettingRound().getBetToken())).thenReturn(Integer.valueOf(1));
+        when(betTokenAuthority.getRandomInteger(game.getCurrentBettingRound().getBetToken())).thenReturn(1);
         game.acceptBet(bet1, gamingMachine);
         game.acceptBet(bet2, gamingMachine);
         game.acceptBet(bet3, gamingMachine);
@@ -115,7 +115,7 @@ public class GameTest {
         BetResult betResult = game.determineWinner(betTokenAuthority.getRandomInteger
                 (game.getCurrentBettingRound().getBetToken()), game.getCurrentBettingRound().getAllBetsMade());
         //assert
-        Assert.assertTrue(betResult.getWinningBet() == bet2);
+        Assert.assertThat(betResult.getWinningBet(), is(bet2));
     }
 
 
