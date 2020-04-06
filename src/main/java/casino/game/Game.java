@@ -96,6 +96,7 @@ public class Game extends AbstractGame{
         for(Bet b : bets){
             if (randomWinValue == counter) {
                 this.betResult = new BetResult(b, b.getMoneyAmount());
+                iGamingMachine.acceptWinner(betResult);
                 return betResult;
             }
             counter++;
