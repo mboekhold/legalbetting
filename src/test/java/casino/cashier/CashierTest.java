@@ -109,4 +109,17 @@ public class CashierTest {
         verify(betLoggingAuthority).handOutGamblingCard(card.getCardID());
     }
 
+    @Test
+    public void handInGamblerCardShouldCallBetLogAuthorityHandInCard() {
+        // Arrange
+        IBetLoggingAuthority betLoggingAuthority = Mockito.mock(IBetLoggingAuthority.class);
+        Cashier cashier = new Cashier(betLoggingAuthority);
+        IPlayerCard card = cashier.distributeGamblerCard();
+        //Act
+        cashier.returnGamblerCard(card);
+
+        // Assert
+        verify(betLoggingAuthority).handInGamblingCard(card.getCardID(), card.returnBetIDs());
+    }
+
 }
