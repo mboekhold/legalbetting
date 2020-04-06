@@ -10,14 +10,14 @@ import casino.gamingmachine.IGamingMachine;
 import casino.idbuilder.BetID;
 import org.junit.Assert;
 import org.junit.Test;
+import org.mockito.InOrder;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 
 import java.util.UUID;
 
 import static org.hamcrest.CoreMatchers.is;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 public class GameTest {
 
@@ -137,7 +137,6 @@ public class GameTest {
     public void checkIfBetLoggingAuthorityHasLoggedTheEndOfABettingRound() {
         //arrange
         IBetLoggingAuthority iBetLoggingAuthority = Mockito.mock(IBetLoggingAuthority.class);
-        BetResult betResult = Mockito.mock(BetResult.class);
         //act
         game.setBetLoggingAuthority(iBetLoggingAuthority);
         game.startBettingRound();
@@ -145,6 +144,23 @@ public class GameTest {
         game.endBettingRound();
         //assert
         verify(iBetLoggingAuthority).endBettingRound(iBettingRound, game.getBetResult());
+    }
+
+    @Test
+    public void checkIfBetLoggingAuthorityAddAcceptedBetIsCalled()
+            throws NoCurrentRoundException {
+        //arrange
+        IBetLoggingAuthority iBetLoggingAuthority = Mockito.mock(IBetLoggingAuthority.class);
+        BetResult betResult = Mockito.mock(BetResult.class);
+        Bet bet1 = new Bet(new BetID(new UUID(123, 123)), new MoneyAmount(5000));
+        //act
+        game.setBetLoggingAuthority(iBetLoggingAuthority);
+        game.startBettingRound();
+        IBettingRound iBettingRound = game.getCurrentBettingRound();
+        game.endBettingRound();
+        //assert
+        verify(iBetLoggingAuthority).addAcceptedBet(bet1,
+                game.getCurrentBettingRound().getBettingRoundID(), gamingMachine.getGamingMachineID());
     }
 
 
